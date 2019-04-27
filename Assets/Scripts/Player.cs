@@ -23,21 +23,21 @@ public class Player : MonoBehaviour
 
     void playerMovement()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            if (CanMoveTo("left")) transform.Translate(Vector3.left);
+            if (CanMoveTo(Vector2Int.left)) transform.Translate(Vector3.left);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            if (CanMoveTo("right")) transform.Translate(Vector3.right);
+            if (CanMoveTo(Vector2Int.right)) transform.Translate(Vector3.right);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            if (CanMoveTo("up")) transform.Translate(Vector3.up);
+            if (CanMoveTo(Vector2Int.up)) transform.Translate(Vector3.up);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            if (CanMoveTo("down")) transform.Translate(Vector3.down);
+            if (CanMoveTo(Vector2Int.down)) transform.Translate(Vector3.down);
         }
         // Qui c'è da aggiungere la condizione per il controllo degli hp
     }
@@ -45,12 +45,6 @@ public class Player : MonoBehaviour
     bool CanMoveTo(Vector2Int direction)
     {
         Tile tile;
-        int posX = (int) transform.position.x;
-        int posY = (int) transform.position.y;
-        if (direction == "left") tile = map.GetTile(posX - 1, posY);
-        else if (direction == "right") tile = map.GetTile(posX + 1, posY);
-        else if (direction == "up") tile = map.GetTile(posX, posY + 1);
-        else tile = map.GetTile(posX, posY - 1);
-        return tile.walkable;
+        return map.GetTile(direction).walkable;
     }
 }

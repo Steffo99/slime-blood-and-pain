@@ -148,14 +148,14 @@ public class Map : MonoBehaviour
     private List<MapRoom> rooms;
     private System.Random rnd;
 
-    public Tile GetTile(int x, int y) {
-        GameObject tileObject = tiles[x, y];
+    public Tile GetTile(Vector2Int position) {
+        GameObject tileObject = tiles[position.x, position.y];
         Tile tile = tileObject.GetComponent<Tile>();
         return tile;
     }
 
     private void InitTile(int x, int y, bool walkable, Sprite tileSprite, bool roomPart) {
-        Tile tile = GetTile(x, y);
+        Tile tile = GetTile(new Vector2Int(x, y));
         tile.walkable = walkable;
         tile.sprite = tileSprite;
         tile.roomPart = roomPart;
