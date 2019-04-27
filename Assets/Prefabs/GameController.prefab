@@ -80,20 +80,23 @@ MonoBehaviour:
   minRoomSize: 2
   maxRoomSize: 8
   maxRoomIterations: 100
-  wallSprite: {fileID: 21300000, guid: f5be5362b22aa6c48993a720ec6c9b84, type: 3}
   floorSprites:
   - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
   - {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065, type: 3}
+  topWallSprites:
+  - {fileID: 21300000, guid: a6548c20c0b36384f9ba55aac5cd513d, type: 3}
+  - {fileID: 21300000, guid: de53d30fbdcfc2e458577832376fddc7, type: 3}
+  botWallSprites:
+  - {fileID: 21300000, guid: 9c493dd4f06f0e6448ca0485a0aec85b, type: 3}
+  - {fileID: 21300000, guid: 9f7113f83f58bbc4b80539190bfc99b8, type: 3}
+  leftWallSprites:
+  - {fileID: 21300000, guid: 1c1ab193bd23fde40a1d3400075ccd26, type: 3}
+  rightWallSprites:
+  - {fileID: 21300000, guid: 47816dfcc9e4290499aa0189a04a5560, type: 3}
+  lCornerWallSprites:
+  - {fileID: 21300000, guid: 1f464248b697d4b459679fd8c4215983, type: 3}
+  rCornerWallSprites:
+  - {fileID: 21300000, guid: 424d116bfc9d297468486f10739cb1b3, type: 3}
   tilePrefab: {fileID: 2955896503201886234, guid: 0e0b618b5499bbb40b076c0291d55487,
     type: 3}
   playerPrefab: {fileID: 2935319493830293412, guid: e8ff38be23e53db40a793f6959c6f4ec,

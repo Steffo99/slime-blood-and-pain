@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AISlime : AI
 {
+    public float moveChance = 0.5f;
     public float visionRange = 4;
     protected Player player;
 
@@ -13,6 +14,7 @@ public class AISlime : AI
     }
 
     public override void OnTurn(){
+        if(Random.Range(0f, 1f) < moveChance) return;
         if (CanSeePlayer()){
             Vector2Int distance = player.MapPosition - MapPosition;
             if (distance.x < 0 && map.CanMoveTo(MapPosition + Vector2Int.left)){

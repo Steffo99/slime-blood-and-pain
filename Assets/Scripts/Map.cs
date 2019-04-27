@@ -88,10 +88,25 @@ public class Map : MonoBehaviour
     public int maxRoomIterations = 100;
 
     [BeforeStartAttribute]
-    public Sprite wallSprite;
+    public List<Sprite> floorSprites;
 
     [BeforeStartAttribute]
-    public List<Sprite> floorSprites;
+    public List<Sprite> topWallSprites;
+
+    [BeforeStartAttribute]
+    public List<Sprite> botWallSprites;
+
+    [BeforeStartAttribute]
+    public List<Sprite> leftWallSprites;
+
+    [BeforeStartAttribute]
+    public List<Sprite> rightWallSprites;
+
+    [BeforeStartAttribute]
+    public List<Sprite> lCornerWallSprites;
+
+    [BeforeStartAttribute]
+    public List<Sprite> rCornerWallSprites;
 
     [BeforeStartAttribute]
     public GameObject tilePrefab;
@@ -110,8 +125,13 @@ public class Map : MonoBehaviour
     private TurnHandler turnHandler;
 
     public Tile GetTile(Vector2Int position) {
-        GameObject tileObject = tiles[position.x, position.y];
-        return tileObject.GetComponent<Tile>();
+        try {
+            GameObject tileObject = tiles[position.x, position.y];
+            return tileObject.GetComponent<Tile>();
+        }
+        catch(System.IndexOutOfRangeException) {
+            return null;
+        }
     }
 
     public bool CanMoveTo(Vector2Int position)
@@ -126,10 +146,9 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void InitTile(Vector2Int position, bool walkable, Sprite tileSprite, bool roomPart) {
+    private void EditTile(Vector2Int position, bool walkable, bool roomPart) {
         Tile tile = GetTile(position);
         tile.walkable = walkable;
-        tile.sprite = tileSprite;
         tile.roomPart |= roomPart;
     }
 
@@ -142,7 +161,6 @@ public class Map : MonoBehaviour
                 tileObject.name = "Tile [" + x.ToString() + ", " + y.ToString() + "]";
                 Tile tile = tileObject.GetComponent<Tile>();
                 tile.walkable = false;
-                tile.sprite = wallSprite;
             }
         }
     }
@@ -150,7 +168,7 @@ public class Map : MonoBehaviour
     private void PlaceRoom(MapRoom mr) {
         for(int x = mr.start.x; x <= mr.end.x; x++) {
             for(int y = mr.start.y; y <= mr.end.y; y++) {
-                InitTile(new Vector2Int(x, y), true, GetFloorTileSprite(), true);
+                EditTile(new Vector2Int(x, y), true, true);
             }
         }
     }
@@ -169,17 +187,17 @@ public class Map : MonoBehaviour
 
     private void PlaceCorridor(MapCorridor mc) {
         Vector2Int cursor = new Vector2Int(mc.start.x, mc.start.y);
-        InitTile(cursor, true, GetFloorTileSprite(), false);
+        EditTile(cursor, true, false);
         if(mc.horizontal_priority) {
             while(cursor.x != mc.end.x) {
                 if(cursor.x > mc.end.x) cursor.x--;
                 else cursor.x++;
-                InitTile(cursor, true, GetFloorTileSprite(), false);
+                EditTile(cursor, true, false);
             }
             while(cursor.y != mc.end.y) {
                 if(cursor.y > mc.end.y) cursor.y--;
                 else cursor.y++;
-                InitTile(cursor, true, GetFloorTileSprite(), false);
+                EditTile(cursor, true, false);
             }
         }
         else
@@ -187,12 +205,12 @@ public class Map : MonoBehaviour
             while(cursor.y != mc.end.y) {
                 if(cursor.y > mc.end.y) cursor.y--;
                 else cursor.y++;
-                InitTile(cursor, true, GetFloorTileSprite(), false);
+                EditTile(cursor, true, false);
             } 
             while(cursor.x != mc.end.x) {
                 if(cursor.x > mc.end.x) cursor.x--;
                 else cursor.x++;
-                InitTile(cursor, true, GetFloorTileSprite(), false);
+                EditTile(cursor, true, false);
             }
         }
     }
@@ -241,8 +259,21 @@ public class Map : MonoBehaviour
         }
     }
 
-    private Sprite GetFloorTileSprite() {
-        return floorSprites[Random.Range(0, floorSprites.Count)];
+    public static Sprite SampleSprite(List<Sprite> list) {
+        return list[Random.Range(0, list.Count)];
+    }
+
+    public void GenerateTileSprites() {
+        for(int x = 0; x < mapSize; x++) {
+            for(int y = 0; y < mapSize; y++) {
+                Tile tile = GetTile(new Vector2Int(x, y));
+                Tile otherTile;
+                if(tile.walkable) tile.sprite = SampleSprite(floorSprites);
+                else if((bool)(otherTile = GetTile(new Vector2Int(x, y+1))) && otherTile.walkable) tile.sprite = SampleSprite(botWallSprites);
+                else if((bool)(otherTile = GetTile(new Vector2Int(x, y+1))) && otherTile.walkable) tile.sprite = SampleSprite(topWallSprites);
+                //TODO: corners
+            }
+        }
     }
 
     private void Start()
@@ -252,7 +283,8 @@ public class Map : MonoBehaviour
         rooms = new List<MapRoom>();
         turnHandler = GameObject.FindGameObjectWithTag("GameController").GetComponentInChildren<TurnHandler>();
 
-        GenerateMap();   
+        GenerateMap();
+        GenerateTileSprites();  
         PlacePlayer();
         PlaceEnemies();
     }

@@ -3,16 +3,8 @@ guid: 052bc569472779a429bfc51246f723d4
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - wallSprite: {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - roomSprite: {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - corridorSprite: {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  - tilePrefab: {instanceID: 0}
-<<<<<<< HEAD
-  executionOrder: -50
-=======
+  defaultReferences: []
   executionOrder: 0
->>>>>>> parent of bc79745... Revert "Merge branch 'master' of https://github.com/Steffo99/LD44"
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
