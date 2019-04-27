@@ -46,13 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpMax: 0
   hp: 0
-<<<<<<< Updated upstream
   sprite: {fileID: 21300000, guid: ee7ef72c830dc204c9df0595e161f049, type: 3}
   visionRange: 4
-=======
-  sprite: {fileID: 21300000, guid: 0121970e693ee0a4d987bd5fe694ad67, type: 3}
-  visionRange: 2.5
->>>>>>> Stashed changes
 --- !u!212 &1351652798109185028
 SpriteRenderer:
   m_ObjectHideFlags: 0
