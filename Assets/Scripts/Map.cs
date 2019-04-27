@@ -42,11 +42,11 @@ public class MapRoom {
             start.y = end.y;
             end.y = swap;
         }
-        if(end.x - start.x > maxRoomSize) {
+        while(end.x - start.x > maxRoomSize) {
             end.x--;
             start.x++;
         }
-        if(end.y - start.y > maxRoomSize) {
+        while(end.y - start.y > maxRoomSize) {
             end.y--;
             start.y++;
         }
@@ -140,6 +140,9 @@ public class Map : MonoBehaviour
     public int maxRoomSize = 6;
 
     [BeforeStartAttribute]
+    public int maxRoomIterations = 100;
+
+    [BeforeStartAttribute]
     public Sprite wallSprite;
 
     [BeforeStartAttribute]
@@ -161,10 +164,10 @@ public class Map : MonoBehaviour
         return tile;
     }
 
-    private void InitTile(int x, int y, bool walkable, Sprite tile_sprite, bool roomPart) {
+    private void InitTile(int x, int y, bool walkable, Sprite tileSprite, bool roomPart) {
         Tile tile = GetTile(x, y);
         tile.walkable = walkable;
-        tile.sprite = tile_sprite;
+        tile.sprite = tileSprite;
         tile.roomPart = roomPart;
     }
 
@@ -174,6 +177,7 @@ public class Map : MonoBehaviour
                 GameObject tileObject = Instantiate(tilePrefab, transform);
                 tileObject.transform.position = new Vector3(x, y, 0);
                 tiles[x, y] = tileObject;
+                tileObject.name = "Tile [" + x.ToString() + ", " + y.ToString() + "]";
                 Tile tile = tileObject.GetComponent<Tile>();
                 tile.walkable = false;
                 tile.sprite = wallSprite;
@@ -193,7 +197,7 @@ public class Map : MonoBehaviour
         //Returns true if the room can be safely placed
         for(int x = Mathf.Clamp(mr.start.x-1, 0, mapSize-1); x <= Mathf.Clamp(mr.end.x+1, 0, mapSize-1); x++) {
             for(int y = Mathf.Clamp(mr.start.y-1, 0, mapSize-1); y <= Mathf.Clamp(mr.end.y+1, 0, mapSize-1); y++) {
-                if(GetTile(x, y).walkable) {
+                if(GetTile(x, y).roomPart) {
                     return false;
                 }
             }
@@ -233,15 +237,17 @@ public class Map : MonoBehaviour
     
     private void GenerateMap() {
         FillWithWalls();
-        while(rooms.Count < roomsToGenerate) {
+        int roomIterations = 0;
+        while(rooms.Count < roomsToGenerate && roomIterations < maxRoomIterations) {
+            roomIterations++;
             MapRoom room = new MapRoom(mapSize, maxRoomSize);
             if(ScanRoom(room)) {
                 PlaceRoom(room);
                 rooms.Add(room);
             }
             if(rooms.Count > 1) {
-                MapRoom from = rooms[rooms.Count-1];
-                MapRoom to = room;
+                MapRoom from = rooms[rooms.Count-2];
+                MapRoom to = rooms[rooms.Count-1];
                 try {
                     MapCorridor corridor = new MapCorridor(from, to, mapSize);
                     PlaceCorridor(corridor);
