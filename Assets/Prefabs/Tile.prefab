@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: 0
+<<<<<<< HEAD
   roomPart: 0
+=======
+>>>>>>> parent of bc79745... Revert "Merge branch 'master' of https://github.com/Steffo99/LD44"
   sprite: {fileID: 0}
 --- !u!212 &1691311275711631131
 SpriteRenderer:
@@ -81,8 +84,13 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+<<<<<<< HEAD
   m_SortingLayerID: -23662865
   m_SortingLayer: -1
+=======
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+>>>>>>> parent of bc79745... Revert "Merge branch 'master' of https://github.com/Steffo99/LD44"
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
