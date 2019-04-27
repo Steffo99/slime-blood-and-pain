@@ -28,7 +28,7 @@ public class MapRoom {
     public readonly IntVector2 end;
     public readonly int mapSize;
 
-    public MapRoom(int mapSize) {
+    public MapRoom(int mapSize, int maxRoomSize) {
         this.mapSize = mapSize;
         start = new IntVector2(Random.Range(0, mapSize), Random.Range(0, mapSize));
         end = new IntVector2(Random.Range(0, mapSize), Random.Range(0, mapSize));
@@ -42,33 +42,45 @@ public class MapRoom {
             start.y = end.y;
             end.y = swap;
         }
+        if(end.x - start.x > maxRoomSize) {
+            end.x--;
+            start.x++;
+        }
+        if(end.y - start.y > maxRoomSize) {
+            end.y--;
+            start.y++;
+        }
+    }
+    
+    public bool RightCheck() {
+        return end.x < mapSize-1;
     }
 
     public IntVector2 RightCorridorAttachment() {
-        if(end.x+1 >= mapSize) {
-            throw new ImpossibleCorridorError();
-        }
         return new IntVector2(end.x+1, Random.Range(start.y, end.y+1));
     }
 
+    public bool LeftCheck() {
+        return start.x > 0;
+    }
+
     public IntVector2 LeftCorridorAttachment() {
-        if(start.x-1 <= 0) {
-            throw new ImpossibleCorridorError();
-        }
-        return new IntVector2(start.x-1, Random.Range(start.y, start.y-1));
+        return new IntVector2(start.x-1, Random.Range(start.y, end.y+1));
+    }
+    
+    public bool TopCheck() {
+        return end.y < mapSize-1;
     }
 
     public IntVector2 TopCorridorAttachment() {
-        if(end.y+1 >= mapSize) {
-            throw new ImpossibleCorridorError();
-        }
         return new IntVector2(Random.Range(start.x, end.x+1), end.y+1);
     }
 
+    public bool BottomCheck() {
+        return start.y > 0;
+    }
+
     public IntVector2 BottomCorridorAttachment() {
-        if(start.y-1 <= 0) {
-            throw new ImpossibleCorridorError();
-        }
         return new IntVector2(Random.Range(start.x, end.x+1), start.y-1);
     }
 }
@@ -88,11 +100,12 @@ public class MapCorridor {
     public MapCorridor(MapRoom from, MapRoom to, int mapSize) {
         List<CorridorModes> corridorModes = new List<CorridorModes>();
         //Find allowed CorridorModes
-        if(from.end.y <= to.start.y) corridorModes.Add(CorridorModes.bottomToTop);
-        if(from.start.y >= to.end.y) corridorModes.Add(CorridorModes.topToBottom);
-        if(from.end.x <= to.start.y) corridorModes.Add(CorridorModes.rightToLeft);
-        if(from.start.y >= to.end.y) corridorModes.Add(CorridorModes.leftToRight);
+        if(from.end.y <= to.start.y && from.BottomCheck() && to.TopCheck()) corridorModes.Add(CorridorModes.bottomToTop);
+        if(from.start.y >= to.end.y && from.TopCheck() && to.BottomCheck()) corridorModes.Add(CorridorModes.topToBottom);
+        if(from.end.x <= to.start.y && from.RightCheck() && to.LeftCheck()) corridorModes.Add(CorridorModes.rightToLeft);
+        if(from.start.y >= to.end.y && from.LeftCheck() && to.RightCheck()) corridorModes.Add(CorridorModes.leftToRight);
         //Select and use a corridor mode
+        if(corridorModes.Count < 1) throw new ImpossibleCorridorError();
         CorridorModes corridorMode = corridorModes[Random.Range(0, corridorModes.Count)];
         if(corridorMode == CorridorModes.bottomToTop) {
             start = from.BottomCorridorAttachment();
@@ -122,6 +135,9 @@ public class Map : MonoBehaviour
 
     [BeforeStartAttribute]
     public int roomsToGenerate = 5;
+
+    [BeforeStartAttribute]
+    public int maxRoomSize = 6;
 
     [BeforeStartAttribute]
     public Sprite wallSprite;
@@ -218,15 +234,19 @@ public class Map : MonoBehaviour
     private void GenerateMap() {
         FillWithWalls();
         while(rooms.Count < roomsToGenerate) {
-            MapRoom room = new MapRoom(mapSize);
+            MapRoom room = new MapRoom(mapSize, maxRoomSize);
             if(ScanRoom(room)) {
                 PlaceRoom(room);
                 rooms.Add(room);
             }
             if(rooms.Count > 1) {
-                MapRoom from = rooms[Random.Range(0, rooms.Count)];
-                MapRoom to = rooms[Random.Range(0, rooms.Count)];
-                MapCorridor corridor = new MapCorridor(from, to, mapSize);
+                MapRoom from = rooms[rooms.Count-1];
+                MapRoom to = room;
+                try {
+                    MapCorridor corridor = new MapCorridor(from, to, mapSize);
+                    PlaceCorridor(corridor);
+                }
+                catch (ImpossibleCorridorError) {}
             }
         }
     }
