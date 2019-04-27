@@ -18,33 +18,40 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerMovement();
+        CheckForMovementInput();
     }
 
-    void playerMovement()
+    void CheckForMovementInput()
     {
+        bool hasMoved = false;
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (CanMoveTo(Vector2Int.left)) transform.Translate(Vector3.left);
+            if (CanMoveTo(Vector2Int.left)) {
+                transform.Translate(Vector3.left);}
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
-            if (CanMoveTo(Vector2Int.right)) transform.Translate(Vector3.right);
+            if (CanMoveTo(Vector2Int.right)) {
+                transform.Translate(Vector3.right);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.W))
         {
-            if (CanMoveTo(Vector2Int.up)) transform.Translate(Vector3.up);
+            if (CanMoveTo(Vector2Int.up)) {
+                transform.Translate(Vector3.up);
+            }
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (CanMoveTo(Vector2Int.down)) transform.Translate(Vector3.down);
+            if (CanMoveTo(Vector2Int.down)) {
+                transform.Translate(Vector3.down);
+            }
         }
-        // Qui c'è da aggiungere la condizione per il controllo degli hp
+        
     }
     
     bool CanMoveTo(Vector2Int direction)
     {
-        Tile tile;
         return map.GetTile(direction).walkable;
     }
 }

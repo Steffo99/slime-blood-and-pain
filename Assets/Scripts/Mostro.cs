@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class Mostro : MonoBehaviour
 {
     public string nome;
@@ -60,3 +61,4 @@ public class Mostro : MonoBehaviour
         return tile.walkable;
     }
 }
+*/

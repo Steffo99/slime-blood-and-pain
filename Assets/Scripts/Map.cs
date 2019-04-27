@@ -154,8 +154,8 @@ public class Map : MonoBehaviour
         return tile;
     }
 
-    private void InitTile(int x, int y, bool walkable, Sprite tileSprite, bool roomPart) {
-        Tile tile = GetTile(new Vector2Int(x, y));
+    private void InitTile(Vector2Int position, bool walkable, Sprite tileSprite, bool roomPart) {
+        Tile tile = GetTile(position);
         tile.walkable = walkable;
         tile.sprite = tileSprite;
         tile.roomPart = roomPart;
@@ -178,7 +178,7 @@ public class Map : MonoBehaviour
     private void PlaceRoom(MapRoom mr) {
         for(int x = mr.start.x; x <= mr.end.x; x++) {
             for(int y = mr.start.y; y <= mr.end.y; y++) {
-                InitTile(x, y, true, roomSprite, true);
+                InitTile(new Vector2Int(x, y), true, roomSprite, true);
             }
         }
     }
@@ -187,7 +187,7 @@ public class Map : MonoBehaviour
         //Returns true if the room can be safely placed
         for(int x = Mathf.Clamp(mr.start.x-1, 0, mapSize-1); x <= Mathf.Clamp(mr.end.x+1, 0, mapSize-1); x++) {
             for(int y = Mathf.Clamp(mr.start.y-1, 0, mapSize-1); y <= Mathf.Clamp(mr.end.y+1, 0, mapSize-1); y++) {
-                if(GetTile(x, y).roomPart) {
+                if(GetTile(new Vector2Int(x, y)).roomPart) {
                     return false;
                 }
             }
@@ -197,17 +197,17 @@ public class Map : MonoBehaviour
 
     private void PlaceCorridor(MapCorridor mc) {
         Vector2Int cursor = new Vector2Int(mc.start.x, mc.start.y);
-        InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+        InitTile(cursor, true, corridorSprite, false);
         if(mc.horizontal_priority) {
             while(cursor.x != mc.end.x) {
                 if(cursor.x > mc.end.x) cursor.x--;
                 else cursor.x++;
-                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+                InitTile(cursor, true, corridorSprite, false);
             }
             while(cursor.y != mc.end.y) {
                 if(cursor.y > mc.end.y) cursor.y--;
                 else cursor.y++;
-                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+                InitTile(cursor, true, corridorSprite, false);
             }
         }
         else
@@ -215,12 +215,12 @@ public class Map : MonoBehaviour
             while(cursor.y != mc.end.y) {
                 if(cursor.y > mc.end.y) cursor.y--;
                 else cursor.y++;
-                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+                InitTile(cursor, true, corridorSprite, false);
             } 
             while(cursor.x != mc.end.x) {
                 if(cursor.x > mc.end.x) cursor.x--;
                 else cursor.x++;
-                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+                InitTile(cursor, true, corridorSprite, false);
             }
         }
     }

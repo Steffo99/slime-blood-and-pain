@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class Consumabile : Object
 {
     // Start is called before the first frame update
@@ -30,3 +31,4 @@ public class Consumabile : Object
         }
     }
 }
+*/
