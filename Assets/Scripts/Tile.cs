@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public bool is_walkable;
-    public Sprite tile_sprite;
+    public bool walkable;
+    public Sprite sprite;
     
     private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = tile_sprite;
+        spriteRenderer.sprite = sprite;
     }
 }
