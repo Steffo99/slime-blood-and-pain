@@ -52,28 +52,9 @@ public class MapRoom {
         end.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
     }
 
-    public Vector2Int RightCorridorAttachment() {
-        return new Vector2Int(end.x+1, Random.Range(start.y, end.y+1));
+    public Vector2Int RandomPoint() {
+        return new Vector2Int(Random.Range(start.x, end.x+1), Random.Range(start.y, end.y+1));
     }
-
-    public Vector2Int LeftCorridorAttachment() {
-        return new Vector2Int(start.x-1, Random.Range(start.y, end.y+1));
-    }
-
-    public Vector2Int TopCorridorAttachment() {
-        return new Vector2Int(Random.Range(start.x, end.x+1), end.y+1);
-    }
-
-    public Vector2Int BottomCorridorAttachment() {
-        return new Vector2Int(Random.Range(start.x, end.x+1), start.y-1);
-    }
-}
-
-public enum CorridorModes {
-    bottomToTop,
-    topToBottom,
-    rightToLeft,
-    leftToRight
 }
 
 public class MapCorridor {
@@ -82,36 +63,10 @@ public class MapCorridor {
     public readonly bool horizontal_priority;
 
     public MapCorridor(MapRoom from, MapRoom to, int mapSize) {
-        List<CorridorModes> corridorModes = new List<CorridorModes>();
-        //Find allowed CorridorModes
-        if(from.end.y <= to.start.y) corridorModes.Add(CorridorModes.bottomToTop);
-        if(from.start.y >= to.end.y) corridorModes.Add(CorridorModes.topToBottom);
-        if(from.end.x <= to.start.x) corridorModes.Add(CorridorModes.rightToLeft);
-        if(from.start.x >= to.end.x) corridorModes.Add(CorridorModes.leftToRight);
-        //Select and use a corridor mode
-        if(corridorModes.Count < 1) throw new ImpossibleCorridorError();
-        CorridorModes corridorMode = corridorModes[Random.Range(0, corridorModes.Count)];
-        if(corridorMode == CorridorModes.bottomToTop) {
-            start = from.BottomCorridorAttachment();
-            end = to.TopCorridorAttachment();
-        }
-        if(corridorMode == CorridorModes.topToBottom) {
-            start = from.TopCorridorAttachment();
-            end = to.BottomCorridorAttachment();
-        }
-        if(corridorMode == CorridorModes.rightToLeft) {
-            start = from.RightCorridorAttachment();
-            end = to.LeftCorridorAttachment();
-        }
-        if(corridorMode == CorridorModes.leftToRight) {
-            start = from.LeftCorridorAttachment();
-            end = to.RightCorridorAttachment();
-        }
+        start = from.RandomPoint();
+        end = to.RandomPoint();
         //50%
         horizontal_priority = Random.Range(0f, 1f) >= 0.5f;
-        
-        start.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
-        end.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
     }
 }
 
