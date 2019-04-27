@@ -14,7 +14,19 @@ public class AISlime : AI
 
     public override void OnTurn(){
         if (CanSeePlayer()){
-            //TODO
+            Vector2Int distance = player.MapPosition - MapPosition;
+            if (distance.x < 0 && map.CanMoveTo(MapPosition + Vector2Int.left)){
+                transform.Translate(Vector3.left);
+            }
+            else if (distance.x > 0 && map.CanMoveTo(MapPosition + Vector2Int.right)){
+                transform.Translate(Vector3.right);
+            }
+            else if (distance.y > 0 && map.CanMoveTo(MapPosition + Vector2Int.up)){
+                transform.Translate(Vector3.up);
+            }
+            else if (distance.y < 0 && map.CanMoveTo(MapPosition + Vector2Int.down)){
+                transform.Translate(Vector3.down);
+            }
         }
         else {
             int direction = Random.Range(0, 4);
