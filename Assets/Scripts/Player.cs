@@ -51,6 +51,6 @@ public class Player : MonoBehaviour
         else if (direction == "right") tile = map.GetTile(posX + 1, posY);
         else if (direction == "up") tile = map.GetTile(posX, posY + 1);
         else tile = map.GetTile(posX, posY - 1);
-        return tile.walkable();
+        return tile.walkable;
     }
 }
