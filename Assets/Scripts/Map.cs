@@ -120,7 +120,7 @@ public class Map : MonoBehaviour
         Tile tile = GetTile(position);
         tile.walkable = walkable;
         tile.sprite = tileSprite;
-        tile.roomPart = roomPart;
+        tile.roomPart |= roomPart;
     }
 
     private void FillWithWalls() {
