@@ -94,7 +94,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
   - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
   - {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065, type: 3}
-  tilePrefab: {fileID: 3219556109866242471, guid: 0e0b618b5499bbb40b076c0291d55487,
+  tilePrefab: {fileID: 2955896503201886234, guid: 0e0b618b5499bbb40b076c0291d55487,
     type: 3}
   playerPrefab: {fileID: 2935319493830293412, guid: e8ff38be23e53db40a793f6959c6f4ec,
     type: 3}
