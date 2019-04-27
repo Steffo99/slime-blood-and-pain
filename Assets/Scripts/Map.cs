@@ -96,22 +96,32 @@ public class Map : MonoBehaviour
     [BeforeStartAttribute]
     public GameObject tilePrefab;
 
+    [BeforeStartAttribute]
+    public GameObject playerPrefab;
+
+    [BeforeStartAttribute]
+    public List<GameObject> enemyPrefabs;
+
+    [BeforeStartAttribute]
+    public int enemiesToSpawn = 10;
+
     private GameObject[,] tiles;
     private List<MapRoom> rooms;
-    private System.Random rnd;
+    private TurnHandler turnHandler;
 
     public Tile GetTile(Vector2Int position) {
         GameObject tileObject = tiles[position.x, position.y];
-        Tile tile = tileObject.GetComponent<Tile>();
-        return tile;
+        return tileObject.GetComponent<Tile>();
     }
 
-    public bool CanMoveTo(Vector2Int direction)
+    public bool CanMoveTo(Vector2Int position)
     {
         try {
-            return GetTile(direction).walkable;
+            bool walkable = GetTile(position).walkable;
+            bool free = !(bool)turnHandler.GetEntityAtPosition(position);
+            return walkable && free;
         }
-        catch(System.ArgumentOutOfRangeException) {
+        catch(System.IndexOutOfRangeException) {
             return false;
         }
     }
@@ -212,6 +222,25 @@ public class Map : MonoBehaviour
         }
     }
 
+    private void PlacePlayer() {
+        MapRoom room = rooms[Random.Range(0, rooms.Count)];
+        Vector2Int point = room.RandomPoint();
+        GameObject playerObject = Instantiate(playerPrefab, turnHandler.transform);
+        playerObject.name = "Player";
+        playerObject.transform.position = new Vector3(point.x, point.y, 0);
+    }
+
+    private void PlaceEnemies() {
+        for(int i = 0; i < enemiesToSpawn; i++) {
+            MapRoom room = rooms[Random.Range(0, rooms.Count)];
+            Vector2Int point = room.RandomPoint();
+            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+            GameObject enemyObject = Instantiate(enemyPrefab, turnHandler.transform);
+            enemyObject.name = "Enemy " + i.ToString();
+            enemyObject.transform.position = new Vector3(point.x, point.y, 0);
+        }
+    }
+
     private Sprite GetFloorTileSprite() {
         return floorSprites[Random.Range(0, floorSprites.Count)];
     }
@@ -221,8 +250,10 @@ public class Map : MonoBehaviour
         //Initialize everything
         tiles = new GameObject[mapSize, mapSize];
         rooms = new List<MapRoom>();
-        rnd = new System.Random();
-        //Generate the map
+        turnHandler = GameObject.FindGameObjectWithTag("GameController").GetComponentInChildren<TurnHandler>();
+
         GenerateMap();   
+        PlacePlayer();
+        PlaceEnemies();
     }
 }

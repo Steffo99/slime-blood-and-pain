@@ -2,24 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     public int exp;
-    public int level; 
-    public int hpMax;
-
-    [AfterStartAttribute]
-    public int hp; 
-    
-    private Map map;
-    private GameObject gameController;
-
-    void Start()
-    {
-        map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
-        gameController = GameObject.FindGameObjectWithTag("GameController");
-        hp = hpMax;
-    }
+    public int level;
 
     void Update()
     {
@@ -29,39 +15,36 @@ public class Player : MonoBehaviour
     void CheckForMovementInput()
     {
         bool hasMoved = false;
-        Vector2Int posizione = new Vector2Int();
-        posizione.x = (int)transform.position.x+1;
-        posizione.y = (int)transform.position.y+1;
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (map.CanMoveTo(posizione + Vector2Int.left)) {
+            if (map.CanMoveTo(MapPosition + Vector2Int.left)) {
                 transform.Translate(Vector3.left);
                 hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            if (map.CanMoveTo(posizione + Vector2Int.right)) {
+            if (map.CanMoveTo(MapPosition + Vector2Int.right)) {
                 transform.Translate(Vector3.right);
                 hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            if (map.CanMoveTo(posizione + Vector2Int.up)) {
+            if (map.CanMoveTo(MapPosition + Vector2Int.up)) {
                 transform.Translate(Vector3.up);
                 hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (map.CanMoveTo(posizione + Vector2Int.down)) {
+            if (map.CanMoveTo(MapPosition + Vector2Int.down)) {
                 transform.Translate(Vector3.down);
                 hasMoved = true;
             }
         }
         if(hasMoved) {
-            gameController.BroadcastMessage("Turn");
+            turnHandler.OnTurn();
         }
     }
 }
