@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public bool walkable;
+    public bool roomPart;
     public Sprite sprite;
     
     private SpriteRenderer spriteRenderer;

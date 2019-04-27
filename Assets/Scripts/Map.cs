@@ -2,6 +2,119 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ImpossibleCorridorError : System.Exception
+{
+    public ImpossibleCorridorError() { }
+    public ImpossibleCorridorError(string message) : base(message) { }
+    public ImpossibleCorridorError(string message, System.Exception inner) : base(message, inner) { }
+    protected ImpossibleCorridorError(
+        System.Runtime.Serialization.SerializationInfo info,
+        System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+}
+
+public class IntVector2 {
+    public int x;
+    public int y;
+
+    public IntVector2(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+public class MapRoom {
+    public readonly IntVector2 start;
+    public readonly IntVector2 end;
+    public readonly int mapSize;
+
+    public MapRoom(int mapSize) {
+        this.mapSize = mapSize;
+        start = new IntVector2(Random.Range(0, mapSize), Random.Range(0, mapSize));
+        end = new IntVector2(Random.Range(0, mapSize), Random.Range(0, mapSize));
+        if(start.x > end.x) {
+            int swap = start.x;
+            start.x = end.x;
+            end.x = swap;
+        }
+        if(start.y > end.y) {
+            int swap = start.y;
+            start.y = end.y;
+            end.y = swap;
+        }
+    }
+
+    public IntVector2 RightCorridorAttachment() {
+        if(end.x+1 >= mapSize) {
+            throw new ImpossibleCorridorError();
+        }
+        return new IntVector2(end.x+1, Random.Range(start.y, end.y+1));
+    }
+
+    public IntVector2 LeftCorridorAttachment() {
+        if(start.x-1 <= 0) {
+            throw new ImpossibleCorridorError();
+        }
+        return new IntVector2(start.x-1, Random.Range(start.y, start.y-1));
+    }
+
+    public IntVector2 TopCorridorAttachment() {
+        if(end.y+1 >= mapSize) {
+            throw new ImpossibleCorridorError();
+        }
+        return new IntVector2(Random.Range(start.x, end.x+1), end.y+1);
+    }
+
+    public IntVector2 BottomCorridorAttachment() {
+        if(start.y-1 <= 0) {
+            throw new ImpossibleCorridorError();
+        }
+        return new IntVector2(Random.Range(start.x, end.x+1), start.y-1);
+    }
+}
+
+public enum CorridorModes {
+    bottomToTop,
+    topToBottom,
+    rightToLeft,
+    leftToRight
+}
+
+public class MapCorridor {
+    public readonly IntVector2 start;
+    public readonly IntVector2 end;
+    public readonly bool horizontal_priority;
+
+    public MapCorridor(MapRoom from, MapRoom to, int mapSize) {
+        List<CorridorModes> corridorModes = new List<CorridorModes>();
+        //Find allowed CorridorModes
+        if(from.end.y <= to.start.y) corridorModes.Add(CorridorModes.bottomToTop);
+        if(from.start.y >= to.end.y) corridorModes.Add(CorridorModes.topToBottom);
+        if(from.end.x <= to.start.y) corridorModes.Add(CorridorModes.rightToLeft);
+        if(from.start.y >= to.end.y) corridorModes.Add(CorridorModes.leftToRight);
+        //Select and use a corridor mode
+        CorridorModes corridorMode = corridorModes[Random.Range(0, corridorModes.Count)];
+        if(corridorMode == CorridorModes.bottomToTop) {
+            start = from.BottomCorridorAttachment();
+            end = to.TopCorridorAttachment();
+        }
+        if(corridorMode == CorridorModes.topToBottom) {
+            start = from.TopCorridorAttachment();
+            end = to.BottomCorridorAttachment();
+        }
+        if(corridorMode == CorridorModes.rightToLeft) {
+            start = from.RightCorridorAttachment();
+            end = to.LeftCorridorAttachment();
+        }
+        if(corridorMode == CorridorModes.leftToRight) {
+            start = from.LeftCorridorAttachment();
+            end = to.RightCorridorAttachment();
+        }
+        //50%
+        horizontal_priority = Random.Range(0f, 1f) >= 0.5f;
+    }
+}
+
 public class Map : MonoBehaviour
 {
     [BeforeStartAttribute]
@@ -11,12 +124,20 @@ public class Map : MonoBehaviour
     public int roomsToGenerate = 5;
 
     [BeforeStartAttribute]
-    public int maxRoomSize = 8;
-
-    public GameObject[,] tiles;
     public Sprite wallSprite;
-    public Sprite floorSprite;
+
+    [BeforeStartAttribute]
+    public Sprite roomSprite;
+
+    [BeforeStartAttribute]
+    public Sprite corridorSprite;
+
+    [BeforeStartAttribute]
     public GameObject tilePrefab;
+
+    private GameObject[,] tiles;
+    private List<MapRoom> rooms;
+    private System.Random rnd;
 
     public Tile GetTile(int x, int y) {
         GameObject tileObject = tiles[x, y];
@@ -24,10 +145,11 @@ public class Map : MonoBehaviour
         return tile;
     }
 
-    private void InitTile(int x, int y, bool is_walkable, Sprite tile_sprite) {
+    private void InitTile(int x, int y, bool walkable, Sprite tile_sprite, bool roomPart) {
         Tile tile = GetTile(x, y);
-        tile.walkable = is_walkable;
+        tile.walkable = walkable;
         tile.sprite = tile_sprite;
+        tile.roomPart = roomPart;
     }
 
     private void FillWithWalls() {
@@ -43,48 +165,78 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void PlaceRoom(int start_x, int start_y, int end_x, int end_y) {
-        for(int x = start_x; x <= end_x; x++) {
-            for(int y = start_y; y <= end_y; y++) {
-                InitTile(x, y, true, floorSprite);
+    private void PlaceRoom(MapRoom mr) {
+        for(int x = mr.start.x; x <= mr.end.x; x++) {
+            for(int y = mr.start.y; y <= mr.end.y; y++) {
+                InitTile(x, y, true, roomSprite, true);
             }
         }
     }
 
-    private void PlaceCorridor(int start_x, int start_y, int end_x, int end_y, bool horizontal_priority) {
-        if(horizontal_priority) {
-            for(int x = start_x; x <= end_x; x++) {
-                InitTile(x, start_y, true, floorSprite);
-            }
-            for(int y = start_y; y <= end_y; y++) {
-                InitTile(end_x, y, true, floorSprite);
+    private bool ScanRoom(MapRoom mr) {
+        //Returns true if the room can be safely placed
+        for(int x = Mathf.Clamp(mr.start.x-1, 0, mapSize-1); x <= Mathf.Clamp(mr.end.x+1, 0, mapSize-1); x++) {
+            for(int y = Mathf.Clamp(mr.start.y-1, 0, mapSize-1); y <= Mathf.Clamp(mr.end.y+1, 0, mapSize-1); y++) {
+                if(GetTile(x, y).walkable) {
+                    return false;
+                }
             }
         }
-        else {
-            for(int y = start_y; y <= end_y; y++) {
-                InitTile(start_x, y, true, floorSprite);
+        return true;
+    }
+
+    private void PlaceCorridor(MapCorridor mc) {
+        IntVector2 cursor = new IntVector2(mc.start.x, mc.start.y);
+        InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+        if(mc.horizontal_priority) {
+            while(cursor.x != mc.end.x) {
+                if(cursor.x > mc.end.x) cursor.x--;
+                else cursor.x++;
+                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
             }
-            for(int x = start_x; x <= end_x; x++) {
-                InitTile(x, end_y, true, floorSprite);
+            while(cursor.y != mc.end.y) {
+                if(cursor.y > mc.end.y) cursor.y--;
+                else cursor.y++;
+                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+            }
+        }
+        else
+        {
+            while(cursor.y != mc.end.y) {
+                if(cursor.y > mc.end.y) cursor.y--;
+                else cursor.y++;
+                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
+            } 
+            while(cursor.x != mc.end.x) {
+                if(cursor.x > mc.end.x) cursor.x--;
+                else cursor.x++;
+                InitTile(cursor.x, cursor.y, true, corridorSprite, false);
             }
         }
     }
     
     private void GenerateMap() {
         FillWithWalls();
-        for(int i = 0; i < roomsToGenerate; i++) {
-            int start_x = Random.Range(0, mapSize);
-            int start_y = Random.Range(0, mapSize);
-            int end_x = Random.Range(0, mapSize) + start_x;
-            int end_y = Random.Range(0, mapSize) + start_y;
-            PlaceRoom(start_x, start_y, end_x, end_y);
+        while(rooms.Count < roomsToGenerate) {
+            MapRoom room = new MapRoom(mapSize);
+            if(ScanRoom(room)) {
+                PlaceRoom(room);
+                rooms.Add(room);
+            }
+            if(rooms.Count > 1) {
+                MapRoom from = rooms[Random.Range(0, rooms.Count)];
+                MapRoom to = rooms[Random.Range(0, rooms.Count)];
+                MapCorridor corridor = new MapCorridor(from, to, mapSize);
+            }
         }
     }
 
     private void Start()
     {
-        //Create the tile array
+        //Initialize everything
         tiles = new GameObject[mapSize, mapSize];
+        rooms = new List<MapRoom>();
+        rnd = new System.Random();
         //Generate the map
         GenerateMap();   
     }
