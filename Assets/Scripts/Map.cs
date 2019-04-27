@@ -13,25 +13,15 @@ public class ImpossibleCorridorError : System.Exception
         System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 }
 
-public class IntVector2 {
-    public int x;
-    public int y;
-
-    public IntVector2(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 public class MapRoom {
-    public readonly IntVector2 start;
-    public readonly IntVector2 end;
+    public readonly Vector2Int start;
+    public readonly Vector2Int end;
     public readonly int mapSize;
 
     public MapRoom(int mapSize, int maxRoomSize) {
         this.mapSize = mapSize;
-        start = new IntVector2(Random.Range(0, mapSize), Random.Range(0, mapSize));
-        end = new IntVector2(Random.Range(0, mapSize), Random.Range(0, mapSize));
+        start = new Vector2Int(Random.Range(0, mapSize), Random.Range(0, mapSize));
+        end = new Vector2Int(Random.Range(0, mapSize), Random.Range(0, mapSize));
         if(start.x > end.x) {
             int swap = start.x;
             start.x = end.x;
@@ -56,32 +46,32 @@ public class MapRoom {
         return end.x < mapSize-1;
     }
 
-    public IntVector2 RightCorridorAttachment() {
-        return new IntVector2(end.x+1, Random.Range(start.y, end.y+1));
+    public Vector2Int RightCorridorAttachment() {
+        return new Vector2Int(end.x+1, Random.Range(start.y, end.y+1));
     }
 
     public bool LeftCheck() {
         return start.x > 0;
     }
 
-    public IntVector2 LeftCorridorAttachment() {
-        return new IntVector2(start.x-1, Random.Range(start.y, end.y+1));
+    public Vector2Int LeftCorridorAttachment() {
+        return new Vector2Int(start.x-1, Random.Range(start.y, end.y+1));
     }
     
     public bool TopCheck() {
         return end.y < mapSize-1;
     }
 
-    public IntVector2 TopCorridorAttachment() {
-        return new IntVector2(Random.Range(start.x, end.x+1), end.y+1);
+    public Vector2Int TopCorridorAttachment() {
+        return new Vector2Int(Random.Range(start.x, end.x+1), end.y+1);
     }
 
     public bool BottomCheck() {
         return start.y > 0;
     }
 
-    public IntVector2 BottomCorridorAttachment() {
-        return new IntVector2(Random.Range(start.x, end.x+1), start.y-1);
+    public Vector2Int BottomCorridorAttachment() {
+        return new Vector2Int(Random.Range(start.x, end.x+1), start.y-1);
     }
 }
 
@@ -93,8 +83,8 @@ public enum CorridorModes {
 }
 
 public class MapCorridor {
-    public readonly IntVector2 start;
-    public readonly IntVector2 end;
+    public readonly Vector2Int start;
+    public readonly Vector2Int end;
     public readonly bool horizontal_priority;
 
     public MapCorridor(MapRoom from, MapRoom to, int mapSize) {
@@ -206,7 +196,7 @@ public class Map : MonoBehaviour
     }
 
     private void PlaceCorridor(MapCorridor mc) {
-        IntVector2 cursor = new IntVector2(mc.start.x, mc.start.y);
+        Vector2Int cursor = new Vector2Int(mc.start.x, mc.start.y);
         InitTile(cursor.x, cursor.y, true, corridorSprite, false);
         if(mc.horizontal_priority) {
             while(cursor.x != mc.end.x) {
