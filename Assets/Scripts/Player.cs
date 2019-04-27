@@ -29,30 +29,33 @@ public class Player : MonoBehaviour
     void CheckForMovementInput()
     {
         bool hasMoved = false;
+        Vector2Int posizione = new Vector2Int();
+        posizione.x = (int)transform.position.x+1;
+        posizione.y = (int)transform.position.y+1;
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (map.CanMoveTo(Vector2Int.left)) {
+            if (map.CanMoveTo(posizione + Vector2Int.left)) {
                 transform.Translate(Vector3.left);
                 hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            if (map.CanMoveTo(Vector2Int.right)) {
+            if (map.CanMoveTo(posizione + Vector2Int.right)) {
                 transform.Translate(Vector3.right);
                 hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            if (map.CanMoveTo(Vector2Int.up)) {
+            if (map.CanMoveTo(posizione + Vector2Int.up)) {
                 transform.Translate(Vector3.up);
                 hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (map.CanMoveTo(Vector2Int.down)) {
+            if (map.CanMoveTo(posizione + Vector2Int.down)) {
                 transform.Translate(Vector3.down);
                 hasMoved = true;
             }
