@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private int exp, level, hp, maxhp;
-    public int startingHp;
-    public Map map;
-    //TODO: Aggiungi gli oggetti in inventario
+    public int exp;
+    public int level; 
+    public int hpMax;
 
-    // Start is called before the first frame update
+    [AfterStartAttribute]
+    public int hp; 
+    
+    private Map map;
+    private GameObject gameController;
+
     void Start()
     {
-        hp = startingHp;
+        map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
+        gameController = GameObject.FindGameObjectWithTag("GameController");
+        hp = hpMax;
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckForMovementInput();
@@ -26,32 +31,34 @@ public class Player : MonoBehaviour
         bool hasMoved = false;
         if (Input.GetKeyDown(KeyCode.A))
         {
-            if (CanMoveTo(Vector2Int.left)) {
-                transform.Translate(Vector3.left);}
+            if (map.CanMoveTo(Vector2Int.left)) {
+                transform.Translate(Vector3.left);
+                hasMoved = true;
+            }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            if (CanMoveTo(Vector2Int.right)) {
+            if (map.CanMoveTo(Vector2Int.right)) {
                 transform.Translate(Vector3.right);
+                hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            if (CanMoveTo(Vector2Int.up)) {
+            if (map.CanMoveTo(Vector2Int.up)) {
                 transform.Translate(Vector3.up);
+                hasMoved = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            if (CanMoveTo(Vector2Int.down)) {
+            if (map.CanMoveTo(Vector2Int.down)) {
                 transform.Translate(Vector3.down);
+                hasMoved = true;
             }
         }
-        
-    }
-    
-    bool CanMoveTo(Vector2Int direction)
-    {
-        return map.GetTile(direction).walkable;
+        if(hasMoved) {
+            gameController.BroadcastMessage("Turn");
+        }
     }
 }

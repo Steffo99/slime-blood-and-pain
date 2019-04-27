@@ -154,6 +154,11 @@ public class Map : MonoBehaviour
         return tile;
     }
 
+    public bool CanMoveTo(Vector2Int direction)
+    {
+        return GetTile(direction).walkable;
+    }
+
     private void InitTile(Vector2Int position, bool walkable, Sprite tileSprite, bool roomPart) {
         Tile tile = GetTile(position);
         tile.walkable = walkable;
