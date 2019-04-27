@@ -25,24 +25,24 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            if (is_valid_movement("left")) transform.Translate(Vector3.left);
+            if (CanMoveTo("left")) transform.Translate(Vector3.left);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            if (is_valid_movement("right")) transform.Translate(Vector3.right);
+            if (CanMoveTo("right")) transform.Translate(Vector3.right);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            if (is_valid_movement("up")) transform.Translate(Vector3.up);
+            if (CanMoveTo("up")) transform.Translate(Vector3.up);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            if (is_valid_movement("down")) transform.Translate(Vector3.down);
+            if (CanMoveTo("down")) transform.Translate(Vector3.down);
         }
         // Qui c'è da aggiungere la condizione per il controllo degli hp
     }
     
-    bool is_valid_movement(string direction)
+    bool CanMoveTo(Vector2Int direction)
     {
         Tile tile;
         int posX = (int) transform.position.x;
