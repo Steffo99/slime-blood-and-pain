@@ -18,10 +18,10 @@ public class MapRoom {
     public readonly Vector2Int end;
     public readonly int mapSize;
 
-    public MapRoom(int mapSize, int maxRoomSize) {
+    public MapRoom(int mapSize, int maxRoomSize, int minRoomSize) {
         this.mapSize = mapSize;
-        start = new Vector2Int(Random.Range(0, mapSize), Random.Range(0, mapSize));
-        end = new Vector2Int(Random.Range(0, mapSize), Random.Range(0, mapSize));
+        start = new Vector2Int(Random.Range(1, mapSize-1), Random.Range(1, mapSize-1));
+        end = new Vector2Int(Random.Range(1, mapSize-1), Random.Range(1, mapSize-1));
         if(start.x > end.x) {
             int swap = start.x;
             start.x = end.x;
@@ -40,34 +40,28 @@ public class MapRoom {
             end.y--;
             start.y++;
         }
-    }
-    
-    public bool RightCheck() {
-        return end.x < mapSize-1;
+        while(end.x - start.x < minRoomSize) {
+            end.x++;
+            start.x--;
+        }
+        while(end.y - start.y < minRoomSize) {
+            end.y++;
+            start.y--;
+        }
+        start.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
+        end.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
     }
 
     public Vector2Int RightCorridorAttachment() {
         return new Vector2Int(end.x+1, Random.Range(start.y, end.y+1));
     }
 
-    public bool LeftCheck() {
-        return start.x > 0;
-    }
-
     public Vector2Int LeftCorridorAttachment() {
         return new Vector2Int(start.x-1, Random.Range(start.y, end.y+1));
-    }
-    
-    public bool TopCheck() {
-        return end.y < mapSize-1;
     }
 
     public Vector2Int TopCorridorAttachment() {
         return new Vector2Int(Random.Range(start.x, end.x+1), end.y+1);
-    }
-
-    public bool BottomCheck() {
-        return start.y > 0;
     }
 
     public Vector2Int BottomCorridorAttachment() {
@@ -90,10 +84,10 @@ public class MapCorridor {
     public MapCorridor(MapRoom from, MapRoom to, int mapSize) {
         List<CorridorModes> corridorModes = new List<CorridorModes>();
         //Find allowed CorridorModes
-        if(from.end.y <= to.start.y && from.BottomCheck() && to.TopCheck()) corridorModes.Add(CorridorModes.bottomToTop);
-        if(from.start.y >= to.end.y && from.TopCheck() && to.BottomCheck()) corridorModes.Add(CorridorModes.topToBottom);
-        if(from.end.x <= to.start.y && from.RightCheck() && to.LeftCheck()) corridorModes.Add(CorridorModes.rightToLeft);
-        if(from.start.y >= to.end.y && from.LeftCheck() && to.RightCheck()) corridorModes.Add(CorridorModes.leftToRight);
+        if(from.end.y <= to.start.y) corridorModes.Add(CorridorModes.bottomToTop);
+        if(from.start.y >= to.end.y) corridorModes.Add(CorridorModes.topToBottom);
+        if(from.end.x <= to.start.x) corridorModes.Add(CorridorModes.rightToLeft);
+        if(from.start.x >= to.end.x) corridorModes.Add(CorridorModes.leftToRight);
         //Select and use a corridor mode
         if(corridorModes.Count < 1) throw new ImpossibleCorridorError();
         CorridorModes corridorMode = corridorModes[Random.Range(0, corridorModes.Count)];
@@ -115,6 +109,9 @@ public class MapCorridor {
         }
         //50%
         horizontal_priority = Random.Range(0f, 1f) >= 0.5f;
+        
+        start.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
+        end.Clamp(new Vector2Int(1, 1), new Vector2Int(mapSize-1, mapSize-1));
     }
 }
 
@@ -127,6 +124,9 @@ public class Map : MonoBehaviour
     public int roomsToGenerate = 5;
 
     [BeforeStartAttribute]
+    public int minRoomSize = 2;
+
+    [BeforeStartAttribute]
     public int maxRoomSize = 6;
 
     [BeforeStartAttribute]
@@ -136,10 +136,7 @@ public class Map : MonoBehaviour
     public Sprite wallSprite;
 
     [BeforeStartAttribute]
-    public Sprite roomSprite;
-
-    [BeforeStartAttribute]
-    public Sprite corridorSprite;
+    public List<Sprite> floorSprites;
 
     [BeforeStartAttribute]
     public GameObject tilePrefab;
@@ -156,7 +153,12 @@ public class Map : MonoBehaviour
 
     public bool CanMoveTo(Vector2Int direction)
     {
-        return GetTile(direction).walkable;
+        try {
+            return GetTile(direction).walkable;
+        }
+        catch(System.ArgumentOutOfRangeException) {
+            return false;
+        }
     }
 
     private void InitTile(Vector2Int position, bool walkable, Sprite tileSprite, bool roomPart) {
@@ -183,7 +185,7 @@ public class Map : MonoBehaviour
     private void PlaceRoom(MapRoom mr) {
         for(int x = mr.start.x; x <= mr.end.x; x++) {
             for(int y = mr.start.y; y <= mr.end.y; y++) {
-                InitTile(new Vector2Int(x, y), true, roomSprite, true);
+                InitTile(new Vector2Int(x, y), true, GetFloorTileSprite(), true);
             }
         }
     }
@@ -202,17 +204,17 @@ public class Map : MonoBehaviour
 
     private void PlaceCorridor(MapCorridor mc) {
         Vector2Int cursor = new Vector2Int(mc.start.x, mc.start.y);
-        InitTile(cursor, true, corridorSprite, false);
+        InitTile(cursor, true, GetFloorTileSprite(), false);
         if(mc.horizontal_priority) {
             while(cursor.x != mc.end.x) {
                 if(cursor.x > mc.end.x) cursor.x--;
                 else cursor.x++;
-                InitTile(cursor, true, corridorSprite, false);
+                InitTile(cursor, true, GetFloorTileSprite(), false);
             }
             while(cursor.y != mc.end.y) {
                 if(cursor.y > mc.end.y) cursor.y--;
                 else cursor.y++;
-                InitTile(cursor, true, corridorSprite, false);
+                InitTile(cursor, true, GetFloorTileSprite(), false);
             }
         }
         else
@@ -220,12 +222,12 @@ public class Map : MonoBehaviour
             while(cursor.y != mc.end.y) {
                 if(cursor.y > mc.end.y) cursor.y--;
                 else cursor.y++;
-                InitTile(cursor, true, corridorSprite, false);
+                InitTile(cursor, true, GetFloorTileSprite(), false);
             } 
             while(cursor.x != mc.end.x) {
                 if(cursor.x > mc.end.x) cursor.x--;
                 else cursor.x++;
-                InitTile(cursor, true, corridorSprite, false);
+                InitTile(cursor, true, GetFloorTileSprite(), false);
             }
         }
     }
@@ -235,11 +237,13 @@ public class Map : MonoBehaviour
         int roomIterations = 0;
         while(rooms.Count < roomsToGenerate && roomIterations < maxRoomIterations) {
             roomIterations++;
-            MapRoom room = new MapRoom(mapSize, maxRoomSize);
+            MapRoom room = new MapRoom(mapSize, maxRoomSize, minRoomSize);
             if(ScanRoom(room)) {
+                //Fill with the room
                 PlaceRoom(room);
                 rooms.Add(room);
             }
+            //Place a corridor
             if(rooms.Count > 1) {
                 MapRoom from = rooms[rooms.Count-2];
                 MapRoom to = rooms[rooms.Count-1];
@@ -247,9 +251,14 @@ public class Map : MonoBehaviour
                     MapCorridor corridor = new MapCorridor(from, to, mapSize);
                     PlaceCorridor(corridor);
                 }
-                catch (ImpossibleCorridorError) {}
+                catch (ImpossibleCorridorError) {
+                }
             }
         }
+    }
+
+    private Sprite GetFloorTileSprite() {
+        return floorSprites[Random.Range(0, floorSprites.Count)];
     }
 
     private void Start()

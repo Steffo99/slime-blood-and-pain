@@ -341,15 +341,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
         type: 3}
-      propertyPath: wallSprite
+      propertyPath: floorSprites.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
+        type: 3}
+      propertyPath: roomsToGenerate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
+        type: 3}
+      propertyPath: floorSprites.Array.data[2]
       value: 
-      objectReference: {fileID: 21300000, guid: 0121970e693ee0a4d987bd5fe694ad67,
+      objectReference: {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065,
         type: 3}
     - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
         type: 3}
-      propertyPath: corridorSprite
+      propertyPath: floorSprites.Array.data[3]
       value: 
-      objectReference: {fileID: 21300000, guid: f5be5362b22aa6c48993a720ec6c9b84,
+      objectReference: {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065,
+        type: 3}
+    - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
+        type: 3}
+      propertyPath: floorSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065,
+        type: 3}
+    - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
+        type: 3}
+      propertyPath: floorSprites.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065,
+        type: 3}
+    - target: {fileID: 6907631410461015020, guid: cd714ea41cb7c454994bf0f5ad99abd1,
+        type: 3}
+      propertyPath: floorSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd714ea41cb7c454994bf0f5ad99abd1, type: 3}

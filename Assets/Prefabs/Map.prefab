@@ -45,8 +45,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSize: 30
   roomsToGenerate: 5
+  minRoomSize: 2
+  maxRoomSize: 6
+  maxRoomIterations: 100
   wallSprite: {fileID: 21300000, guid: f5be5362b22aa6c48993a720ec6c9b84, type: 3}
-  roomSprite: {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
-  corridorSprite: {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  floorSprites:
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: e0e60c9a4ff0b8e429e6cfe316da9bbf, type: 3}
+  - {fileID: 21300000, guid: fa4c9841fd8a5fb4f94ff78c95301065, type: 3}
   tilePrefab: {fileID: 3219556109866242471, guid: 0e0b618b5499bbb40b076c0291d55487,
     type: 3}

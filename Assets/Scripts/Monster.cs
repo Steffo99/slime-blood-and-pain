@@ -16,7 +16,7 @@ public class Monster : MonoBehaviour
     private Map map;
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         map = GameObject.FindGameObjectWithTag("Map").GetComponent<Map>();
         hasSpottedPlayer = false;
