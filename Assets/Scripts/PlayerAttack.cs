@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    protected Player player;
+    protected EntityPlayer player;
     protected GameObject gameController;
     protected TurnHandler turnHandler;
     protected Map map;
 
     protected void Start() {
-        player = GetComponent<Player>();
+        player = GetComponent<EntityPlayer>();
         gameController = GameObject.FindGameObjectWithTag("GameController");
         turnHandler = gameController.GetComponentInChildren<TurnHandler>();
         map = gameController.GetComponentInChildren<Map>();

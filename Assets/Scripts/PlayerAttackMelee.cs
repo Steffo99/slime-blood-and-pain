@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack_Melee : PlayerAttack
+public class PlayerAttackMelee : PlayerAttack
 {
     public float damage = 1f;
 

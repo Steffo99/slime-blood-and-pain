@@ -12,8 +12,8 @@ public class TurnHandler : MonoBehaviour
                 entity.Die();
             }
             //Move AIs
-            if(entity is AI) {
-                AI ai = entity as AI;
+            if(entity is EntityMonster) {
+                EntityMonster ai = entity as EntityMonster;
                 ai.OnTurn();
             }
         }

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AISlime : AI
+public class EntityMonsterSlime : EntityMonster
 {
     public float moveChance = 0.5f;
     public float visionRange = 4;
-    protected Player player;
+    protected EntityPlayer player;
 
     protected new void Start() {
         base.Start();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<EntityPlayer>();
     }
 
     public override void OnTurn(){

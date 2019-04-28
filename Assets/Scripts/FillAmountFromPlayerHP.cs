@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class FillAmountFromPlayerHP : MonoBehaviour
 {
-    private Player player;
+    private EntityPlayer player;
     private Image image;
 
     private void Start() {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<EntityPlayer>();
         image = GetComponent<Image>();
     }
 

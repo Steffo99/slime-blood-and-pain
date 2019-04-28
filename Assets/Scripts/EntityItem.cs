@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : Entity
+public class EntityItem : Entity
 {
     public static string itemName = "White Triangle";
 
@@ -11,7 +11,7 @@ public class Item : Entity
         overlappable = true;
     }
 
-    public virtual void OnPickup(Player player) {
+    public virtual void OnPickup(EntityPlayer player) {
         Debug.LogWarning("OnPickup not overridden");
         messageBar.Write("Picked up: " + itemName, Color.yellow);
         Destroy(gameObject);

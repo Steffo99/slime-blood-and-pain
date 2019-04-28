@@ -7,7 +7,7 @@ public enum ControlMode {
     Attack
 }
 
-public class Player : Entity
+public class EntityPlayer : Entity
 {
     public int exp;
     public int level;
@@ -98,8 +98,8 @@ public class Player : Entity
             //Check for pickuppable items
             List<Entity> entities = turnHandler.GetEntitiesAtPosition(MapPosition);
             foreach(Entity entity in entities) {
-                if(entity is Item) {
-                    Item item = entity as Item;
+                if(entity is EntityItem) {
+                    EntityItem item = entity as EntityItem;
                     item.OnPickup(this);
                 }
             }

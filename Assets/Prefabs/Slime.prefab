@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2043533519980591455}
-  - component: {fileID: 571363246873614695}
   - component: {fileID: 1351652798109185028}
+  - component: {fileID: 571363246873614695}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -32,24 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &571363246873614695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1164136568549368904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fcfe4b94620b234fb7a294bf4453a69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpMax: 2
-  overlappable: 0
-  hp: 0
-  sprite: {fileID: 21300000, guid: ee7ef72c830dc204c9df0595e161f049, type: 3}
-  moveChance: 0.5
-  visionRange: 4
 --- !u!212 &1351652798109185028
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,3 +80,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &571363246873614695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164136568549368904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce1b6adc640d6f46bbf4d7072735b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpMax: 0
+  overlappable: 0
+  hp: 0
+  sprite: {fileID: 0}
+  moveChance: 0.5
+  visionRange: 4
