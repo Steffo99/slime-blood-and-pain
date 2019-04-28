@@ -187,10 +187,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8182065397885380581, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182065397885380581, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8182065397885380581, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331449797751746845, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331449797751746845, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1331449797751746845, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406203509107481990, guid: 4c25f33cb89f6624db48fc49d353a7f2,
+        type: 3}
+      propertyPath: m_FillClockwise
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6763073704789207266, guid: 4c25f33cb89f6624db48fc49d353a7f2,
         type: 3}
       propertyPath: m_Text
-      value: Text goes here.
+      value: Hello! I'm THE MESSAGE BAR!
       objectReference: {fileID: 0}
     - target: {fileID: 6763073704789207266, guid: 4c25f33cb89f6624db48fc49d353a7f2,
         type: 3}
