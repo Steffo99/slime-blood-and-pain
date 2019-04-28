@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Item : Entity
 {
-    private new void Start() {
+    protected override void Start() {
+        base.Start();
         overlappable = true;
     }
 
     public virtual void OnPickup(Player player) {
         Debug.LogWarning("OnPickup not overridden");
+        turnHandler.WriteToMessageBar("Picked up [NULL].");
+        Destroy(gameObject);
     }
 }
