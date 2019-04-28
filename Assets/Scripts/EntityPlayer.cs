@@ -9,23 +9,36 @@ public enum ControlMode {
 
 public class EntityPlayer : Entity
 {
-    public Inventory inventory;
-
+    public Dictionary<InventoryItems, int> inventory; 
+    public InventoryItems selectedItem;
     protected ControlMode controlMode;
     protected Animator animator;
 
     protected override void Start() {
         base.Start();
-        inventory = new Inventory();
         animator = GetComponent<Animator>();
         controlMode = ControlMode.Move;
+        //Init inventory
+        inventory.Add(InventoryItems.HealthPotion, 0);
     }
 
     protected void Update()
     {
         CheckForControlModeChange();
+        CheckForInventoryInput();
         if(controlMode == ControlMode.Move) CheckForMovementInput();
         if(controlMode == ControlMode.Attack) CheckForAttackInput();    
+    }
+
+    protected void CheckForInventoryInput() {
+        if(Input.GetKeyDown(KeyCode.X)) {
+            if(selectedItem == InventoryItems.Empty) {
+                selectedItem = 0;
+            }
+            else {
+                selectedItem += 1;
+            }
+        }
     }
 
     protected void CheckForControlModeChange() {
