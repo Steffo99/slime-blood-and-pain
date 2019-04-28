@@ -23,6 +23,7 @@ public class Entity : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected TurnHandler turnHandler;
     protected Map map;
+    protected MessageBar messageBar;
 
     protected virtual void Start()
     {
@@ -31,6 +32,13 @@ public class Entity : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController");
         turnHandler = gameController.GetComponentInChildren<TurnHandler>();
         map = gameController.GetComponentInChildren<Map>();
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        messageBar = canvas.GetComponentInChildren<MessageBar>();
         hp = hpMax;
+    }
+
+    public virtual void Die() {
+        Debug.LogWarning("Die not overridden");
+        Destroy(gameObject);
     }
 }

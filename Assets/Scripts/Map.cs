@@ -138,7 +138,7 @@ public class Map : MonoBehaviour
     {
         try {
             bool walkable = GetTile(position).walkable;
-            List<Entity> entities = turnHandler.GetEntityAtPosition(position);
+            List<Entity> entities = turnHandler.GetEntitiesAtPosition(position);
             bool free = true;
             foreach(Entity entity in entities) {
                 free &= entity.overlappable;
