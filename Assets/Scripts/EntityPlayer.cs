@@ -9,11 +9,14 @@ public enum ControlMode {
 
 public class EntityPlayer : Entity
 {
+    public Inventory inventory;
+
     protected ControlMode controlMode;
     protected Animator animator;
 
     protected override void Start() {
         base.Start();
+        inventory = new Inventory();
         animator = GetComponent<Animator>();
         controlMode = ControlMode.Move;
     }
