@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class MapTile : MonoBehaviour
 {
     public bool walkable;
     public bool roomPart;

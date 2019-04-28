@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public int hpMax;
+    public float hpMax;
+    public bool overlappable = false;
 
     [AfterStartAttribute]
-    public int hp;
-
-    [BeforeStartAttribute]
-    public Sprite sprite;
+    public float hp;
 
     public Vector2Int MapPosition {
         get {
@@ -22,14 +20,21 @@ public class Entity : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected TurnHandler turnHandler;
     protected Map map;
+    protected MessageBar messageBar;
 
-    protected void Start()
+    protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite;
         gameController = GameObject.FindGameObjectWithTag("GameController");
         turnHandler = gameController.GetComponentInChildren<TurnHandler>();
         map = gameController.GetComponentInChildren<Map>();
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        messageBar = canvas.GetComponentInChildren<MessageBar>();
         hp = hpMax;
+    }
+
+    public virtual void Die() {
+        Debug.LogWarning("Die not overridden");
+        Destroy(gameObject);
     }
 }

@@ -124,10 +124,10 @@ public class Map : MonoBehaviour
     private List<MapRoom> rooms;
     private TurnHandler turnHandler;
 
-    public Tile GetTile(Vector2Int position) {
+    public MapTile GetTile(Vector2Int position) {
         try {
             GameObject tileObject = tiles[position.x, position.y];
-            return tileObject.GetComponent<Tile>();
+            return tileObject.GetComponent<MapTile>();
         }
         catch(System.IndexOutOfRangeException) {
             return null;
@@ -138,7 +138,11 @@ public class Map : MonoBehaviour
     {
         try {
             bool walkable = GetTile(position).walkable;
-            bool free = !(bool)turnHandler.GetEntityAtPosition(position);
+            List<Entity> entities = turnHandler.GetEntitiesAtPosition(position);
+            bool free = true;
+            foreach(Entity entity in entities) {
+                free &= entity.overlappable;
+            }
             return walkable && free;
         }
         catch(System.IndexOutOfRangeException) {
@@ -147,7 +151,7 @@ public class Map : MonoBehaviour
     }
 
     private void EditTile(Vector2Int position, bool walkable, bool roomPart) {
-        Tile tile = GetTile(position);
+        MapTile tile = GetTile(position);
         tile.walkable = walkable;
         tile.roomPart |= roomPart;
     }
@@ -159,7 +163,7 @@ public class Map : MonoBehaviour
                 tileObject.transform.position = new Vector3(x, y, 0);
                 tiles[x, y] = tileObject;
                 tileObject.name = "Tile [" + x.ToString() + ", " + y.ToString() + "]";
-                Tile tile = tileObject.GetComponent<Tile>();
+                MapTile tile = tileObject.GetComponent<MapTile>();
                 tile.walkable = false;
             }
         }
@@ -266,8 +270,8 @@ public class Map : MonoBehaviour
     public void GenerateTileSprites() {
         for(int x = 0; x < mapSize; x++) {
             for(int y = 0; y < mapSize; y++) {
-                Tile tile = GetTile(new Vector2Int(x, y));
-                Tile otherTile;
+                MapTile tile = GetTile(new Vector2Int(x, y));
+                MapTile otherTile;
                 if(tile.walkable) tile.sprite = SampleSprite(floorSprites);
                 else if((bool)(otherTile = GetTile(new Vector2Int(x, y+1))) && otherTile.walkable) tile.sprite = SampleSprite(botWallSprites);
                 else if((bool)(otherTile = GetTile(new Vector2Int(x, y+1))) && otherTile.walkable) tile.sprite = SampleSprite(topWallSprites);

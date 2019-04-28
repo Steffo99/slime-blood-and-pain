@@ -5,19 +5,28 @@ using UnityEngine;
 public class TurnHandler : MonoBehaviour
 {
     public void OnTurn() {
-        AI[] ais = gameObject.GetComponentsInChildren<AI>();
-        foreach(AI ai in ais) {
-            ai.OnTurn();
+        Entity[] entities = gameObject.GetComponentsInChildren<Entity>();
+        foreach(Entity entity in entities) {
+            //Check for deaths
+            if(entity.hp <= 0) {
+                entity.Die();
+            }
+            //Move AIs
+            if(entity is EntityMonster) {
+                EntityMonster ai = entity as EntityMonster;
+                ai.OnTurn();
+            }
         }
     }
 
-    public Entity GetEntityAtPosition(Vector2Int position) {
+    public List<Entity> GetEntitiesAtPosition(Vector2Int position) {
         Entity[] entities = GetComponentsInChildren<Entity>();
+        List<Entity> found = new List<Entity>();
         foreach(Entity entity in entities) {
             if(entity.MapPosition == position) {
-                return entity;
+                found.Add(entity);
             }
         }
-        return null;
+        return found;
     }
 }
