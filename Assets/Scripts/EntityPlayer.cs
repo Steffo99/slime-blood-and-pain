@@ -9,10 +9,15 @@ public enum ControlMode {
 
 public class EntityPlayer : Entity
 {
+    public Inventory inventory;
+
     protected ControlMode controlMode;
+    protected Animator animator;
 
     protected override void Start() {
         base.Start();
+        inventory = new Inventory();
+        animator = GetComponent<Animator>();
         controlMode = ControlMode.Move;
     }
 
@@ -27,10 +32,12 @@ public class EntityPlayer : Entity
         if(Input.GetKeyDown(KeyCode.Escape)) {
             controlMode = ControlMode.Move;
             messageBar.Write("Control mode: Move", Color.cyan);
+            animator.SetBool("IsWalking", true);
         }
         if(Input.GetKeyDown(KeyCode.A)) {
             controlMode = ControlMode.Attack;
             messageBar.Write("Control mode: Attack", Color.cyan);
+            animator.SetBool("IsWalking", false);
         }
     }
 
@@ -39,10 +46,12 @@ public class EntityPlayer : Entity
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             hasAttacked = GetComponent<PlayerAttack>().Attack(MapPosition + Vector2Int.left);
+            spriteRenderer.flipX = true;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             hasAttacked = GetComponent<PlayerAttack>().Attack(MapPosition + Vector2Int.right);
+            spriteRenderer.flipX = false;
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -66,7 +75,7 @@ public class EntityPlayer : Entity
             if (map.CanMoveTo(MapPosition + Vector2Int.left)) {
                 transform.Translate(Vector3.left);
                 hasMoved = true;
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -74,7 +83,7 @@ public class EntityPlayer : Entity
             if (map.CanMoveTo(MapPosition + Vector2Int.right)) {
                 transform.Translate(Vector3.right);
                 hasMoved = true;
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
             }
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
