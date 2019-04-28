@@ -10,9 +10,6 @@ public class Entity : MonoBehaviour
     [AfterStartAttribute]
     public float hp;
 
-    [BeforeStartAttribute]
-    public Sprite sprite;
-
     public Vector2Int MapPosition {
         get {
             return new Vector2Int((int)transform.position.x, (int)transform.position.y);
@@ -28,7 +25,6 @@ public class Entity : MonoBehaviour
     protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite;
         gameController = GameObject.FindGameObjectWithTag("GameController");
         turnHandler = gameController.GetComponentInChildren<TurnHandler>();
         map = gameController.GetComponentInChildren<Map>();

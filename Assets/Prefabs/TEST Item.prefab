@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfb3c44da9ebb1840b5a2bcdfd5e2730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 0
+  hpMax: 1
   overlappable: 0
   hp: 0
   sprite: {fileID: 0}

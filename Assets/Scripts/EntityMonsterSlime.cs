@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class EntityMonsterSlime : EntityMonster
 {
+    public override string Name {
+        get {
+            return "Slime";
+        }
+    } 
+
     public float moveChance = 0.5f;
     public float visionRange = 4;
     protected EntityPlayer player;
