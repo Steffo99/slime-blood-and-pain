@@ -24,7 +24,7 @@ public class Entity : MonoBehaviour
     protected TurnHandler turnHandler;
     protected Map map;
 
-    protected void Start()
+    protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprite;

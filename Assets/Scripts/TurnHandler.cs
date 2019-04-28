@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class TurnHandler : MonoBehaviour
 {
+    private MessageBar messageBar;
+
+    private void Start() {
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        messageBar = canvas.GetComponentInChildren<MessageBar>();
+    }
+
+    public void WriteToMessageBar(string message) {
+        messageBar.Write(message);
+    }
+
     public void OnTurn() {
         AI[] ais = gameObject.GetComponentsInChildren<AI>();
         foreach(AI ai in ais) {
