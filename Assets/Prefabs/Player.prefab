@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpMax: 0
   hp: 0
-  sprite: {fileID: 21300000, guid: fe9c8eab186d5004eaad446d8e220800, type: 3}
+  sprite: {fileID: 21300000, guid: 88f4c277892ae9449a57b321cd810bce, type: 3}
   exp: 0
   level: 0
 --- !u!212 &-5893075763862095451
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: -522733599
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fe9c8eab186d5004eaad446d8e220800, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88f4c277892ae9449a57b321cd810bce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

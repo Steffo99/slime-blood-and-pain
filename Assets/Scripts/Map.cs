@@ -138,7 +138,11 @@ public class Map : MonoBehaviour
     {
         try {
             bool walkable = GetTile(position).walkable;
-            bool free = !(bool)turnHandler.GetEntityAtPosition(position);
+            List<Entity> entities = turnHandler.GetEntityAtPosition(position);
+            bool free = true;
+            foreach(Entity entity in entities) {
+                free &= entity.overlappable;
+            }
             return walkable && free;
         }
         catch(System.IndexOutOfRangeException) {

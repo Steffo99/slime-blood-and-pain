@@ -11,13 +11,14 @@ public class TurnHandler : MonoBehaviour
         }
     }
 
-    public Entity GetEntityAtPosition(Vector2Int position) {
+    public List<Entity> GetEntityAtPosition(Vector2Int position) {
         Entity[] entities = GetComponentsInChildren<Entity>();
+        List<Entity> found = new List<Entity>();
         foreach(Entity entity in entities) {
             if(entity.MapPosition == position) {
-                return entity;
+                found.Add(entity);
             }
         }
-        return null;
+        return found;
     }
 }

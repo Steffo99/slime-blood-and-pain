@@ -20,6 +20,7 @@ public class Player : Entity
             if (map.CanMoveTo(MapPosition + Vector2Int.left)) {
                 transform.Translate(Vector3.left);
                 hasMoved = true;
+                spriteRenderer.flipX = false;
             }
         }
         else if (Input.GetKeyDown(KeyCode.D))
@@ -27,6 +28,7 @@ public class Player : Entity
             if (map.CanMoveTo(MapPosition + Vector2Int.right)) {
                 transform.Translate(Vector3.right);
                 hasMoved = true;
+                spriteRenderer.flipX = true;
             }
         }
         else if (Input.GetKeyDown(KeyCode.W))
@@ -44,6 +46,15 @@ public class Player : Entity
             }
         }
         if(hasMoved) {
+            //Check for pickuppable items
+            List<Entity> entities = turnHandler.GetEntityAtPosition(MapPosition);
+            foreach(Entity entity in entities) {
+                if(entity is Item) {
+                    Item item = entity as Item;
+                    item.OnPickup(this);
+                }
+            }
+            //Turn happens!
             turnHandler.OnTurn();
         }
     }

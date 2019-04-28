@@ -5,6 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public int hpMax;
+    public bool overlappable = false;
 
     [AfterStartAttribute]
     public int hp;
