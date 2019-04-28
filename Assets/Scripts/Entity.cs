@@ -10,9 +10,6 @@ public class Entity : MonoBehaviour
     [AfterStartAttribute]
     public float hp;
 
-    [BeforeStartAttribute]
-    public Sprite sprite;
-
     public Vector2Int MapPosition {
         get {
             return new Vector2Int((int)transform.position.x, (int)transform.position.y);
@@ -23,14 +20,21 @@ public class Entity : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected TurnHandler turnHandler;
     protected Map map;
+    protected MessageBar messageBar;
 
     protected virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = sprite;
         gameController = GameObject.FindGameObjectWithTag("GameController");
         turnHandler = gameController.GetComponentInChildren<TurnHandler>();
         map = gameController.GetComponentInChildren<Map>();
+        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        messageBar = canvas.GetComponentInChildren<MessageBar>();
         hp = hpMax;
+    }
+
+    public virtual void Die() {
+        Debug.LogWarning("Die not overridden");
+        Destroy(gameObject);
     }
 }

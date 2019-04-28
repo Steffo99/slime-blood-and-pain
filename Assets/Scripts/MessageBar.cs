@@ -17,7 +17,8 @@ public class MessageBar : MonoBehaviour
         opacity = 0f;
     }
 
-    public void Write(string message) {
+    public void Write(string message, Color color) {
+        text.color = color;
         text.text = message;
         opacity = 1f;
     }

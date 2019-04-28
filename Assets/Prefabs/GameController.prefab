@@ -289,7 +289,8 @@ MonoBehaviour:
     type: 3}
   enemyPrefabs:
   - {fileID: 470211819356819165, guid: 1bd6e08f590fdd844854a34504aeaa4a, type: 3}
-  enemiesToSpawn: 10
+  - {fileID: 1164136568549368904, guid: a4aeecfb369f0974490d158ef9489335, type: 3}
+  enemiesToSpawn: 15
 --- !u!1 &6763073704789207264
 GameObject:
   m_ObjectHideFlags: 0

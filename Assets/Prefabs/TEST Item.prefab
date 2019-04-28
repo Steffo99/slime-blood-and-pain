@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 470211819356819162}
   - component: {fileID: 7501912107144583665}
   m_Layer: 0
-  m_Name: TEST_ Item
+  m_Name: TEST Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,13 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 470211819356819165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f0883433553dbb4fa23a815949f596b, type: 3}
+  m_Script: {fileID: 11500000, guid: cfb3c44da9ebb1840b5a2bcdfd5e2730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 0
+  hpMax: 1
   overlappable: 0
   hp: 0
-  sprite: {fileID: 21300000, guid: 5e4d29e1adc2ea0429b199b82253416c, type: 3}
+  sprite: {fileID: 0}
 --- !u!212 &7501912107144583665
 SpriteRenderer:
   m_ObjectHideFlags: 0
