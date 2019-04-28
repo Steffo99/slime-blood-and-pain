@@ -9,9 +9,6 @@ public enum ControlMode {
 
 public class EntityPlayer : Entity
 {
-    public int exp;
-    public int level;
-
     protected ControlMode controlMode;
 
     protected override void Start() {
