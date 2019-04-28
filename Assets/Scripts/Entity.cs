@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public int hpMax;
+    public float hpMax;
     public bool overlappable = false;
 
     [AfterStartAttribute]
-    public int hp;
+    public float hp;
 
     [BeforeStartAttribute]
     public Sprite sprite;

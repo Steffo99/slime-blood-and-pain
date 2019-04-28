@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de6b97c3d785d146a0df2c1c078fe91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 0
-  hp: 0
+  hpMax: 10
+  overlappable: 0
+  hp: 10
   sprite: {fileID: 21300000, guid: 88f4c277892ae9449a57b321cd810bce, type: 3}
   exp: 0
   level: 0
