@@ -29,10 +29,12 @@ public class EntityPlayer : Entity
         if(Input.GetKeyDown(KeyCode.Escape)) {
             controlMode = ControlMode.Move;
             messageBar.Write("Control mode: Move", Color.cyan);
+            animator.SetBool("IsWalking", true);
         }
         if(Input.GetKeyDown(KeyCode.A)) {
             controlMode = ControlMode.Attack;
             messageBar.Write("Control mode: Attack", Color.cyan);
+            animator.SetBool("IsWalking", false);
         }
     }
 
