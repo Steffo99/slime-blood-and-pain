@@ -100,16 +100,22 @@ public class EntityPlayer : Entity
             }
         }
         if(hasMoved) {
+            bool doTurn = true;
             //Check for pickuppable items
             List<Entity> entities = turnHandler.GetEntitiesAtPosition(MapPosition);
             foreach(Entity entity in entities) {
                 if(entity is EntityItem) {
                     EntityItem item = entity as EntityItem;
+                    if(item is EntityItemStairs) {
+                        doTurn = false;
+                    }
                     item.OnPickup(this);
                 }
             }
             //Turn happens!
-            turnHandler.OnTurn();
+            if(doTurn) {
+                turnHandler.OnTurn();
+            }
         }
     }
 
@@ -120,7 +126,6 @@ public class EntityPlayer : Entity
         }
     }
 
-    //This is not an error wtf
     public override void OnNewLevel() {}
 
     public override void Die() {

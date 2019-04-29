@@ -95,7 +95,7 @@ MonoBehaviour:
   hpTrueMax: 2
   overlappable: 0
   hpMax: 2
-  hp: 0
+  hp: 2
   monsterName: Slime
   moveChance: 0.5
   visionRange: 4
