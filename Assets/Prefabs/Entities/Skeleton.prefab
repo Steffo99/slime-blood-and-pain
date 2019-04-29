@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8229417268116166537}
   - component: {fileID: -4227728170108252613}
-  - component: {fileID: -7336024761621732000}
+  - component: {fileID: 6575694489730919195}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7336024761621732000
+--- !u!114 &6575694489730919195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,18 +89,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8811060229651695861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce1b6adc640d6f46bbf4d7072735b7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 08019d8cb8af79544a488e243ab1fec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpTrueMax: 6
+  hpTrueMax: 10
   overlappable: 0
-  hpMax: 0
-  hp: 0
-  monsterName: Skeleton
-  moveChance: 0.9
+  hpMax: 10
+  hp: 10
+  monsterName: Skeleton Swordsman
+  moveChance: 0.1
   visionRange: 5
   attackRange: 1
-  damage: 3
+  damage: 2
   attackAnimation: {fileID: 5896060810164205279, guid: 602b69921902efc44ab8a008655b6574,
     type: 3}
   upSprite: {fileID: 21300000, guid: 5c2d2fa90021e444aaac3dd540becacb, type: 3}
