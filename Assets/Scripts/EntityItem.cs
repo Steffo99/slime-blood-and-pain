@@ -17,7 +17,6 @@ public class EntityItem : Entity
     }
 
     public virtual void OnPickup(EntityPlayer player) {
-        Debug.LogWarning("OnPickup not overridden");
         messageBar.Write("Picked up: " + Name, Color.yellow);
         Destroy(gameObject);
     }

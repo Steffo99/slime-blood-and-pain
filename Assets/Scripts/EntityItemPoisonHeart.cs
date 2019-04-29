@@ -13,7 +13,7 @@ public class EntityItemPoisonHeart : EntityItem
     } 
     
     public override void OnPickup(EntityPlayer player) {
-        messageBar.Write("You used: " + Name, Color.yellow);
+        messageBar.Write("Picked up: " + Name, Color.orange);
         player.hp -= damage;
         Destroy(gameObject);
     }

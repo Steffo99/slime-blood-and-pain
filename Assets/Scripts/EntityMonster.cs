@@ -9,7 +9,7 @@ public class EntityMonster : Entity
             Debug.LogWarning("No name given to a monster");
             return "";
         }
-    } 
+    }
 
     public virtual void OnTurn(){
         Debug.LogWarning("OnTurn() not overridden");

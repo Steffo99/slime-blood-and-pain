@@ -12,6 +12,7 @@ public class EntityMonsterSlime : EntityMonster
 
     public float moveChance = 0.5f;
     public float visionRange = 4f;
+    public GameObject attackAnimation;
     protected EntityPlayer player;
 
     protected new void Start() {

@@ -12,6 +12,7 @@ public class EntityMonsterMage : EntityMonster
 
     public float moveChance = 0.5f;
     public float visionRange = 7f;
+    public GameObject attackAnimation;
     protected EntityPlayer player;
 
     protected new void Start() {

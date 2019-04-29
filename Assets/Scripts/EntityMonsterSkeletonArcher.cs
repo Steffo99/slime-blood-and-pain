@@ -12,6 +12,7 @@ public class EntityMonsterSkeletonArcher : EntityMonster
 
     public float moveChance = 0f;
     public float visionRange = 5f;
+    public GameObject attackAnimation;
     protected EntityPlayer player;
 
     protected new void Start() {

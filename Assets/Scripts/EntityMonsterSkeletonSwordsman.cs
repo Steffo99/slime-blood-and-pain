@@ -12,6 +12,7 @@ public class EntityMonsterSkeletonSwordsman : EntityMonster
 
     public float moveChance = 0f;
     public float visionRange = 4f;
+    public GameObject attackAnimation;
     protected EntityPlayer player;
 
     protected new void Start() {

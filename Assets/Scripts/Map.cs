@@ -245,9 +245,16 @@ public class Map : MonoBehaviour
     }
 
     private void PlacePlayer() {
+        //Check for an existing player
         MapRoom room = rooms[Random.Range(0, rooms.Count)];
         Vector2Int point = room.RandomPoint();
-        GameObject playerObject = Instantiate(playerPrefab, turnHandler.transform);
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if(playerObject == null) {
+            playerObject = Instantiate(playerPrefab, turnHandler.transform);
+        }
+        else {
+            playerObject.transform.parent = turnHandler.transform;
+        }
         playerObject.name = "Player";
         playerObject.transform.position = new Vector3(point.x, point.y, 0);
     }
