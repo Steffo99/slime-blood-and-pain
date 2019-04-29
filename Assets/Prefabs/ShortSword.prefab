@@ -98,4 +98,4 @@ MonoBehaviour:
   hp: 1
   hpChange: -1
   maxHpChange: -1
-  damage: 3
+  damage: 7

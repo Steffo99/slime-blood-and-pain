@@ -12,6 +12,7 @@ public class EntityMonsterSlime : EntityMonster
 
     public float moveChance = 0.5f;
     public float visionRange = 4f;
+    public float damage = 1f;
     public GameObject attackAnimation;
     protected EntityPlayer player;
 
@@ -38,18 +39,24 @@ public class EntityMonsterSlime : EntityMonster
             }
         }
         else {
-            int direction = Random.Range(0, 4);
-            if (direction == 0 && map.CanMoveTo(MapPosition + Vector2Int.left)){
-                transform.Translate(Vector3.left);
+            if(Vector3.Distance(player.transform.position, transform.position) > 2){
+                int direction = Random.Range(0, 4);
+                if (direction == 0 && map.CanMoveTo(MapPosition + Vector2Int.left)){
+                    transform.Translate(Vector3.left);
+                }
+                else if (direction == 1 && map.CanMoveTo(MapPosition + Vector2Int.right)){
+                    transform.Translate(Vector3.right);
+                }
+                else if (direction == 2 && map.CanMoveTo(MapPosition + Vector2Int.up)){
+                    transform.Translate(Vector3.up);
+                }
+                else if (direction == 3 && map.CanMoveTo(MapPosition + Vector2Int.down)){
+                    transform.Translate(Vector3.down);
+                }
             }
-            else if (direction == 1 && map.CanMoveTo(MapPosition + Vector2Int.right)){
-                transform.Translate(Vector3.right);
-            }
-            else if (direction == 2 && map.CanMoveTo(MapPosition + Vector2Int.up)){
-                transform.Translate(Vector3.up);
-            }
-            else if (direction == 3 && map.CanMoveTo(MapPosition + Vector2Int.down)){
-                transform.Translate(Vector3.down);
+            else{
+                float damage_done = Random.value * damage;
+                player.hp -= damage;
             }
         }
     }
