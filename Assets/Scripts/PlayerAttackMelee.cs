@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttackMelee : PlayerAttack
 {
     public float damage = 1f;
+    public GameObject attackAnimation;
 
     public override bool Attack(Vector2Int target) {
         List<Entity> targetEntities = turnHandler.GetEntitiesAtPosition(target);
@@ -13,6 +14,7 @@ public class PlayerAttackMelee : PlayerAttack
         }
         Entity targetEntity = targetEntities[0];
         targetEntity.hp -= damage;
+        Instantiate(attackAnimation, targetEntity.transform);
         return true;
     }
 }

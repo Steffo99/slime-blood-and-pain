@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntityItemPoisonHeart : EntityItem
 {
-    public int damage;
+    public float damage;
 
     public override string Name {
         get {
@@ -13,7 +13,7 @@ public class EntityItemPoisonHeart : EntityItem
     } 
     
     public override void OnPickup(EntityPlayer player) {
-        messageBar.Write("Picked up: " + Name, Color.yellow);
+        messageBar.Write("Poisoned! Took " + damage.ToString("0.0") + " damage!", Color.red);
         player.hp -= damage;
         Destroy(gameObject);
     }

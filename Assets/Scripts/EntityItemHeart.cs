@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntityItemHeart : EntityItem
 {
-    public int regen;
+    public float regen;
 
     public override string Name {
         get {
@@ -13,7 +13,7 @@ public class EntityItemHeart : EntityItem
     } 
 
     public override void OnPickup(EntityPlayer player) {
-        messageBar.Write("Picked up: " + Name, Color.green);
+        messageBar.Write("Healed " + regen.ToString("0.0") + " HP!", Color.green);
         player.hp += regen;
         if (player.hp > player.hpMax) player.hp = player.hpMax;
         Destroy(gameObject);
