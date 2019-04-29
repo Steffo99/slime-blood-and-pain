@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public float hpMax;
+    [BeforeStartAttribute]
+    public float hpTrueMax;
+
     public bool overlappable = false;
+
+    [AfterStartAttribute]
+    public float hpMax;
 
     [AfterStartAttribute]
     public float hp;
@@ -30,6 +35,7 @@ public class Entity : MonoBehaviour
         map = gameController.GetComponentInChildren<Map>();
         GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
         messageBar = canvas.GetComponentInChildren<MessageBar>();
+        hpMax = hpTrueMax;
         hp = hpMax;
     }
 

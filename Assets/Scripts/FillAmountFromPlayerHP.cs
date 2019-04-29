@@ -7,6 +7,7 @@ public class FillAmountFromPlayerHP : MonoBehaviour
 {
     private EntityPlayer player;
     private Image image;
+    public bool max;
 
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<EntityPlayer>();
@@ -14,6 +15,11 @@ public class FillAmountFromPlayerHP : MonoBehaviour
     }
 
     private void Update() {
-        image.fillAmount = player.hp / player.hpMax;
+        if(max) {
+            image.fillAmount = player.hpMax / player.hpTrueMax;
+        }
+        else {
+            image.fillAmount = player.hp / player.hpTrueMax;
+        }
     }
 }
