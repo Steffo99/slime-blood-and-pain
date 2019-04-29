@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08019d8cb8af79544a488e243ab1fec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpTrueMax: 10
+  hpTrueMax: 6
   overlappable: 0
   hpMax: 10
   hp: 10

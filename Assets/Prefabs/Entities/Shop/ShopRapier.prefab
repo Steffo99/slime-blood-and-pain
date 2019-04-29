@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -812928086201289980}
   - component: {fileID: 7711614280348628083}
   m_Layer: 0
-  m_Name: SHOP Rapier
+  m_Name: ShopRapier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -522733599
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0b83d7efeff86e3458c4860e3760ab38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,8 +96,8 @@ MonoBehaviour:
   overlappable: 1
   hpMax: 1
   hp: 1
-  hpChange: -2
-  maxHpChange: -2
+  hpChange: -4
+  maxHpChange: -4
   damage: 3
   attackAnimation: {fileID: 5896060810164205279, guid: 602b69921902efc44ab8a008655b6574,
     type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1965585829385846694}
   - component: {fileID: -144353291634153714}
   m_Layer: 0
-  m_Name: SkeletonArrow
+  m_Name: SkeletonArcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5306e803d8d9344b3a7b100fa00deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpTrueMax: 10
+  hpTrueMax: 4
   overlappable: 0
   hpMax: 0
   hp: 0
