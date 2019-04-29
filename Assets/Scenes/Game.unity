@@ -296,6 +296,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051317733}
   m_CullTransparentMesh: 0
+--- !u!1001 &365882321541334849
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1583397669518592851, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_Name
+      value: GameObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 15.984027
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.344006
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.046875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 724674536bb835145984a0082871530e, type: 3}
 --- !u!1 &630169749068828386
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +409,23 @@ GameObject:
   - component: {fileID: 2984726599447885319}
   m_Layer: 5
   m_Name: HP Bar Border
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1583397669518592851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1583397669518592851, guid: 724674536bb835145984a0082871530e,
+    type: 3}
+  m_PrefabInstance: {fileID: 365882321541334849}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7476914477509890938}
+  m_Layer: 0
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,6 +697,21 @@ RectTransform:
   m_AnchoredPosition: {x: -10, y: 10}
   m_SizeDelta: {x: 219.6, y: 86.7}
   m_Pivot: {x: 1, y: 0}
+--- !u!4 &7476914477509890938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 7476914477509890938, guid: 724674536bb835145984a0082871530e,
+    type: 3}
+  m_PrefabInstance: {fileID: 365882321541334849}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583397669518592851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.984027, y: 16.344006, z: -5.046875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7596450466852265825
 GameObject:
   m_ObjectHideFlags: 0
