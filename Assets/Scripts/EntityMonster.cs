@@ -6,8 +6,8 @@ public class EntityMonster : Entity
 {
     public string monsterName;
 
-    public virtual void OnTurn(){
-        Debug.LogWarning("OnTurn() not overridden");
+    public virtual void OnTurn() {
+        //Do nothing.
     }
 
     public override void Die() {       

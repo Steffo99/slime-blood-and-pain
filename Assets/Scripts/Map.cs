@@ -131,7 +131,9 @@ public class Map : MonoBehaviour
     public bool CanMoveTo(Vector2Int position)
     {
         try {
-            bool walkable = GetTile(position).walkable;
+            MapTile tile = GetTile(position);
+            if(tile == null) return false;
+            bool walkable = tile.walkable;
             List<Entity> entities = turnHandler.GetEntitiesAtPosition(position);
             bool free = true;
             foreach(Entity entity in entities) {
@@ -257,6 +259,9 @@ public class Map : MonoBehaviour
         for(int i = 0; i < enemiesToSpawn; i++) {
             MapRoom room = rooms[Random.Range(0, rooms.Count)];
             Vector2Int point = room.RandomPoint();
+            if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
+                continue;
+            }
             GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
             GameObject enemyObject = Instantiate(enemyPrefab, turnHandler.transform);
             enemyObject.name = "Enemy " + i.ToString();
@@ -268,6 +273,9 @@ public class Map : MonoBehaviour
         for(int i = 0; i < curiositiesToSpawn; i++) {
             MapRoom room = rooms[Random.Range(0, rooms.Count)];
             Vector2Int point = room.RandomPoint();
+            if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
+                continue;
+            }
             GameObject curiosityPrefab = curiositiesPrefabs[Random.Range(0, curiositiesPrefabs.Count)];
             GameObject curiosityObject = Instantiate(curiosityPrefab, turnHandler.transform);
             curiosityObject.name = "Curiosity " + i.ToString();
