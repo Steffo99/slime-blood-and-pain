@@ -92,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6effa3f71be846844844432d38652a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 1
+  hpTrueMax: 1
   overlappable: 1
+  hpMax: 1
   hp: 1
   damage: 10

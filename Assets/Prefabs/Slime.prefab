@@ -92,9 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce1b6adc640d6f46bbf4d7072735b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 2
+  hpTrueMax: 10
   overlappable: 0
+  hpMax: 2
   hp: 0
-  sprite: {fileID: 0}
   moveChance: 0.5
   visionRange: 4
+  attackAnimation: {fileID: 0}
