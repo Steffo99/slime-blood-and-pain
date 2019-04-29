@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07fddfe35675304f92b18a213875e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 0
-  overlappable: 0
+  hpMax: 1
+  overlappable: 1
   hp: 1
   regen: 10

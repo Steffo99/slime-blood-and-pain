@@ -7,10 +7,10 @@ public class DestroySelfAfterSomeTime : MonoBehaviour {
     public float time = 1f;
 
     protected void Start() {
-        Invoke(DestroySelf, time);
+        Invoke("Delet", time);
     }
 
-    protected void DestroySelf() {
+    protected void Delet() {
         Destroy(gameObject);
     }
 }

@@ -13,7 +13,7 @@ public class EntityItemHeart : EntityItem
     } 
 
     public override void OnPickup(EntityPlayer player) {
-        messageBar.Write("Picked up: " + Name, Color.lime);
+        messageBar.Write("Picked up: " + Name, Color.green);
         player.hp += regen;
         if (player.hp > player.hpMax) player.hp = player.hpMax;
         Destroy(gameObject);

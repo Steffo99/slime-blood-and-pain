@@ -17,9 +17,9 @@ public class EntityItemShop : EntityItem {
         Debug.LogWarning("OnPurchase not overridden");
     }
 
-    public override void OnPickup() {
+    public override void OnPickup(EntityPlayer player) {
         player.hp += hpChange;
-        player.maxHpChange += maxHpChange;
+        player.hpMax += maxHpChange;
         OnPurchase();
         messageBar.Write("Bought: " + Name, Color.yellow);
         Destroy(gameObject);
