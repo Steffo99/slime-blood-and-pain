@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ControlMode {
     Move,
@@ -22,7 +23,8 @@ public class EntityPlayer : Entity
     {
         CheckForControlModeChange();
         if(controlMode == ControlMode.Move) CheckForMovementInput();
-        if(controlMode == ControlMode.Attack) CheckForAttackInput();    
+        if(controlMode == ControlMode.Attack) CheckForAttackInput();
+        CheckForTurnSkipInput();
     }
 
     protected void CheckForControlModeChange() {
@@ -111,5 +113,17 @@ public class EntityPlayer : Entity
         }
     }
 
+    protected void CheckForTurnSkipInput() {
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            messageBar.Write("Skipped turn.", Color.cyan);
+            turnHandler.OnTurn();
+        }
+    }
+
+    //This is not an error wtf
     public override void OnNewLevel() {}
+
+    public override void Die() {
+        SceneManager.LoadScene("Dead", LoadSceneMode.Single);
+    }
 }

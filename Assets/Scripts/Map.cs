@@ -91,22 +91,7 @@ public class Map : MonoBehaviour
     public List<Sprite> floorSprites;
 
     [BeforeStartAttribute]
-    public List<Sprite> topWallSprites;
-
-    [BeforeStartAttribute]
     public List<Sprite> botWallSprites;
-
-    [BeforeStartAttribute]
-    public List<Sprite> leftWallSprites;
-
-    [BeforeStartAttribute]
-    public List<Sprite> rightWallSprites;
-
-    [BeforeStartAttribute]
-    public List<Sprite> lCornerWallSprites;
-
-    [BeforeStartAttribute]
-    public List<Sprite> rCornerWallSprites;
 
     [BeforeStartAttribute]
     public GameObject tilePrefab;
@@ -119,6 +104,15 @@ public class Map : MonoBehaviour
 
     [BeforeStartAttribute]
     public int enemiesToSpawn = 10;
+
+    [BeforeStartAttribute]
+    public List<GameObject> curiositiesPrefabs;
+
+    [BeforeStartAttribute]
+    public int curiositiesToSpawn = 35;
+
+    [BeforeStartAttribute]
+    public GameObject stairsPrefab;
 
     private GameObject[,] tiles;
     private List<MapRoom> rooms;
@@ -270,6 +264,25 @@ public class Map : MonoBehaviour
         }
     }
 
+    private void PlaceCuriosities() {
+        for(int i = 0; i < curiositiesToSpawn; i++) {
+            MapRoom room = rooms[Random.Range(0, rooms.Count)];
+            Vector2Int point = room.RandomPoint();
+            GameObject curiosityPrefab = curiositiesPrefabs[Random.Range(0, curiositiesPrefabs.Count)];
+            GameObject curiosityObject = Instantiate(curiosityPrefab, turnHandler.transform);
+            curiosityObject.name = "Curiosity " + i.ToString();
+            curiosityObject.transform.position = new Vector3(point.x, point.y, 0);
+        }
+    }
+
+    private void PlaceStairs() {
+        MapRoom room = rooms[Random.Range(0, rooms.Count)];
+        Vector2Int point = room.RandomPoint();
+        GameObject curiosityObject = Instantiate(stairsPrefab, turnHandler.transform);
+        curiosityObject.name = "Stairs";
+        curiosityObject.transform.position = new Vector3(point.x, point.y, 0);
+    }
+
     public static Sprite SampleSprite(List<Sprite> list) {
         return list[Random.Range(0, list.Count)];
     }
@@ -281,7 +294,6 @@ public class Map : MonoBehaviour
                 MapTile otherTile;
                 if(tile.walkable) tile.sprite = SampleSprite(floorSprites);
                 else if((bool)(otherTile = GetTile(new Vector2Int(x, y+1))) && otherTile.walkable) tile.sprite = SampleSprite(botWallSprites);
-                else if((bool)(otherTile = GetTile(new Vector2Int(x, y+1))) && otherTile.walkable) tile.sprite = SampleSprite(topWallSprites);
                 //TODO: corners
             }
         }
@@ -299,6 +311,12 @@ public class Map : MonoBehaviour
         GenerateTileSprites();  
         PlacePlayer();
         PlaceEnemies();
+        PlaceCuriosities();
+        PlaceStairs();
+    }
+
+    public void OnNewLevel() {
+        //Suppress the error
     }
 
     private void Start()
