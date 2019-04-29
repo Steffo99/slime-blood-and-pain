@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntityMonsterWatcher : EntityMonster
 {
-public float moveChance = 1f;
+    public float moveChance = 1f;
     public float visionRange = 5f;
     public float attackRange = 1f;
     public float damage = 2f;
