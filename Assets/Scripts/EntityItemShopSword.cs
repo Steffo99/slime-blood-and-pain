@@ -15,9 +15,8 @@ public class EntityItemShopSword : EntityItemShop {
 
     protected override void OnPurchase(EntityPlayer player) {
         Destroy(player.GetComponent<PlayerAttack>());
-        player.gameObject.AddComponent<PlayerAttackMelee>();
-        PlayerAttackMelee pam = player.GetComponent<PlayerAttackMelee>();
+        PlayerAttackMelee pam = player.gameObject.AddComponent<PlayerAttackMelee>();
         pam.damage = this.damage;
-        pam.attackAnimation = attackAnimation;
+        pam.attackAnimation = this.attackAnimation;
     }
 }

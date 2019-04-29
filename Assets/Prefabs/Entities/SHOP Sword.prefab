@@ -96,8 +96,8 @@ MonoBehaviour:
   overlappable: 1
   hpMax: 1
   hp: 0
-  hpChange: -1
-  maxHpChange: -1
+  hpChange: -6
+  maxHpChange: -6
   damage: 5
   attackAnimation: {fileID: 5896060810164205279, guid: 602b69921902efc44ab8a008655b6574,
     type: 3}

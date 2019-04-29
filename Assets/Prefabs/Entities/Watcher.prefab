@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4565250353192838926}
   - component: {fileID: 7689595554396751579}
-  - component: {fileID: 7361680276203333039}
+  - component: {fileID: 2344911077221548336}
   m_Layer: 0
   m_Name: Watcher
   m_TagString: Untagged
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7361680276203333039
+--- !u!114 &2344911077221548336
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,18 +89,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2071995852067845502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce1b6adc640d6f46bbf4d7072735b7f, type: 3}
+  m_Script: {fileID: 11500000, guid: d03e35d46ecc79e45a2b1a4735094763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpTrueMax: 10
+  hpTrueMax: 15
   overlappable: 0
-  hpMax: 0
-  hp: 0
+  hpMax: 15
+  hp: 15
   monsterName: Watcher
-  moveChance: 0.2
-  visionRange: 12
+  moveChance: 0.1
+  visionRange: 5
   attackRange: 1
-  damage: 5
+  damage: 2
+  dash_chance_starting: 0.5
   attackAnimation: {fileID: 5896060810164205279, guid: 602b69921902efc44ab8a008655b6574,
     type: 3}
   upSprite: {fileID: 21300000, guid: 82bebf5d3f0f9864ea1f8f7a58b67bb7, type: 3}
