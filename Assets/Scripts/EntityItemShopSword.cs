@@ -12,7 +12,7 @@ public class EntityItemShopSword : EntityItemShop {
         }
     }
 
-    protected override void OnPurchase() {
+    protected override void OnPurchase(EntityPlayer player) {
         Destroy(player.GetComponent<PlayerAttack>());
         player.gameObject.AddComponent<PlayerAttackMelee>();
         PlayerAttackMelee pam = player.GetComponent<PlayerAttackMelee>();

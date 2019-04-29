@@ -287,8 +287,9 @@ public class Map : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
+    public void NewLevel() {
+        //Cleanup everything.
+        transform.parent.BroadcastMessage("OnNewLevel");
         //Initialize everything
         tiles = new GameObject[mapSize, mapSize];
         rooms = new List<MapRoom>();
@@ -298,5 +299,10 @@ public class Map : MonoBehaviour
         GenerateTileSprites();  
         PlacePlayer();
         PlaceEnemies();
+    }
+
+    private void Start()
+    {
+        NewLevel();
     }
 }

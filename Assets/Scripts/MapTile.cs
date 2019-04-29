@@ -15,4 +15,8 @@ public class MapTile : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprite;
     }
+
+    public void OnNewLevel() {
+        Destroy(gameObject);
+    }
 }

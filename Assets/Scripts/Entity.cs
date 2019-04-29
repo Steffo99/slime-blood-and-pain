@@ -39,6 +39,10 @@ public class Entity : MonoBehaviour
         hp = hpMax;
     }
 
+    public virtual void OnNewLevel() {
+        Destroy(gameObject);
+    }
+
     public virtual void Die() {
         Debug.LogWarning("Die not overridden");
         Destroy(gameObject);

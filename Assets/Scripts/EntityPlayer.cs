@@ -110,4 +110,6 @@ public class EntityPlayer : Entity
             turnHandler.OnTurn();
         }
     }
+
+    public override void OnNewLevel() {};
 }
