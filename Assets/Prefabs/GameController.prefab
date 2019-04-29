@@ -272,6 +272,14 @@ MonoBehaviour:
   curiositiesToSpawn: 35
   stairsPrefab: {fileID: 6102638172941227538, guid: 772ce20bae1b4ee41a0f142397309d32,
     type: 3}
+  shopCorePrefab: {fileID: 2367471035175245579, guid: c3ac02f145d6cad40ae01edcbdcd9e5c,
+    type: 3}
+  shopEdgePrefab: {fileID: 2996832894549006294, guid: e2be382851e835b47b54bd2312bc7e2c,
+    type: 3}
+  shopItems:
+  - {fileID: 1306643954942640807, guid: 95108a3fad23a64459e636e30a6af002, type: 3}
+  - {fileID: 92662261887728601, guid: 7c2fb7e54af6dea468b8dac35e5b6e8c, type: 3}
+  - {fileID: 9176106732687901849, guid: f706c9b9b5b3ec1459e524a5defeb1c8, type: 3}
 --- !u!1 &6763073704789207264
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

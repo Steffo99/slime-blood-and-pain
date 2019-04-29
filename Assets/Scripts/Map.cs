@@ -114,6 +114,15 @@ public class Map : MonoBehaviour
     [BeforeStartAttribute]
     public GameObject stairsPrefab;
 
+    [BeforeStartAttribute]
+    public GameObject shopCorePrefab;
+
+    [BeforeStartAttribute]
+    public GameObject shopEdgePrefab;
+
+    [BeforeStartAttribute]
+    public GameObject[] shopItems; //3
+
     private GameObject[,] tiles;
     private List<MapRoom> rooms;
     private TurnHandler turnHandler;
@@ -258,9 +267,13 @@ public class Map : MonoBehaviour
     private void PlaceEnemies() {
         for(int i = 0; i < enemiesToSpawn; i++) {
             MapRoom room = rooms[Random.Range(0, rooms.Count)];
-            Vector2Int point = room.RandomPoint();
-            if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
-                continue;
+            Vector2Int point;
+            while(true) {
+                point = room.RandomPoint();
+                if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
+                    continue;
+                }
+                break;
             }
             GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
             GameObject enemyObject = Instantiate(enemyPrefab, turnHandler.transform);
@@ -272,9 +285,13 @@ public class Map : MonoBehaviour
     private void PlaceCuriosities() {
         for(int i = 0; i < curiositiesToSpawn; i++) {
             MapRoom room = rooms[Random.Range(0, rooms.Count)];
-            Vector2Int point = room.RandomPoint();
-            if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
-                continue;
+            Vector2Int point;
+            while(true) {
+                point = room.RandomPoint();
+                if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
+                    continue;
+                }
+                break;
             }
             GameObject curiosityPrefab = curiositiesPrefabs[Random.Range(0, curiositiesPrefabs.Count)];
             GameObject curiosityObject = Instantiate(curiosityPrefab, turnHandler.transform);
@@ -285,7 +302,14 @@ public class Map : MonoBehaviour
 
     private void PlaceStairs() {
         MapRoom room = rooms[Random.Range(0, rooms.Count)];
-        Vector2Int point = room.RandomPoint();
+        Vector2Int point;
+        while(true) {
+            point = room.RandomPoint();
+            if(turnHandler.GetEntitiesAtPosition(point).Count > 0) {
+                continue;
+            }
+            break;
+        }
         GameObject curiosityObject = Instantiate(stairsPrefab, turnHandler.transform);
         curiosityObject.name = "Stairs";
         curiosityObject.transform.position = new Vector3(point.x, point.y, 0);
@@ -307,6 +331,54 @@ public class Map : MonoBehaviour
         }
     }
 
+    private void PlaceShop() {
+        MapRoom room = rooms[Random.Range(0, rooms.Count)];
+        Vector2Int point;
+        while(true) {
+            bool done = true;
+            point = room.RandomPoint();
+            for(int x = -2; x <= 2; x++) {
+                for(int y = -2; y <= 2; y++) {
+                    if(turnHandler.GetEntitiesAtPosition(new Vector2Int(x, y)).Count > 0) {
+                        done = false;
+                    }
+                    if(!done) break;
+                }
+                if(!done) break;
+            }
+            if(done) break;
+        }
+        GameObject shopCore = Instantiate(shopCorePrefab, turnHandler.transform);
+        shopCore.name = "Shop (Core)";
+        shopCore.transform.position = new Vector3(point.x, point.y, 0);
+        GameObject shopEdge = Instantiate(shopEdgePrefab, turnHandler.transform);
+        shopEdge.name = "Shop (Edge)";
+        shopEdge.transform.position = new Vector3(point.x+1, point.y, 0);
+        shopEdge = Instantiate(shopEdgePrefab, turnHandler.transform);
+        shopEdge.name = "Shop (Edge)";
+        shopEdge.transform.position = new Vector3(point.x-1, point.y, 0);
+        shopEdge = Instantiate(shopEdgePrefab, turnHandler.transform);
+        shopEdge.name = "Shop (Edge)";
+        shopEdge.transform.position = new Vector3(point.x+1, point.y+1, 0);
+        shopEdge = Instantiate(shopEdgePrefab, turnHandler.transform);
+        shopEdge.name = "Shop (Edge)";
+        shopEdge.transform.position = new Vector3(point.x-1, point.y+1, 0);
+        shopEdge = Instantiate(shopEdgePrefab, turnHandler.transform);
+        shopEdge.name = "Shop (Edge)";
+        shopEdge.transform.position = new Vector3(point.x, point.y+1, 0);
+        shopEdge = Instantiate(shopEdgePrefab, turnHandler.transform);
+        shopEdge.name = "Shop (Edge)";
+        GameObject shopItem1 = Instantiate(shopItems[0], turnHandler.transform);
+        shopItem1.transform.position = new Vector3(point.x, point.y-1, 0);
+        shopEdge.name = "Shop Item 1";
+        GameObject shopItem2 = Instantiate(shopItems[1], turnHandler.transform);
+        shopItem2.transform.position = new Vector3(point.x+1, point.y-1, 0);
+        shopEdge.name = "Shop Item 2";
+        GameObject shopItem3 = Instantiate(shopItems[2], turnHandler.transform);
+        shopItem3.transform.position = new Vector3(point.x-1, point.y-1, 0);
+        shopEdge.name = "Shop Item 3";
+    }
+
     public void NewLevel() {
         //Cleanup everything.
         transform.parent.BroadcastMessage("OnNewLevel");
@@ -316,7 +388,8 @@ public class Map : MonoBehaviour
         turnHandler = GameObject.FindGameObjectWithTag("GameController").GetComponentInChildren<TurnHandler>();
 
         GenerateMap();
-        GenerateTileSprites();  
+        GenerateTileSprites();
+        PlaceShop();
         PlacePlayer();
         PlaceEnemies();
         PlaceCuriosities();
