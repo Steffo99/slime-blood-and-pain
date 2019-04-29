@@ -532,7 +532,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 2935319493830293412, guid: e8ff38be23e53db40a793f6959c6f4ec,
     type: 3}
   enemyPrefabs:
-  - {fileID: 470211819356819165, guid: 1bd6e08f590fdd844854a34504aeaa4a, type: 3}
+  - {fileID: 6102638172941227538, guid: 772ce20bae1b4ee41a0f142397309d32, type: 3}
   - {fileID: 1164136568549368904, guid: a4aeecfb369f0974490d158ef9489335, type: 3}
   enemiesToSpawn: 15
 --- !u!1 &4341632257663970948

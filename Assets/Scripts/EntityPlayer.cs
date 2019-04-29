@@ -111,5 +111,5 @@ public class EntityPlayer : Entity
         }
     }
 
-    public override void OnNewLevel() {};
+    public override void OnNewLevel() {}
 }
