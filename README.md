@@ -75,6 +75,11 @@ A demon you aren't ever going to see. Our artist thought it looked cool, though.
 |Humor|423rd|3.021|49|
 |Mood|862nd|2.904|49|
 
-# A final note
+## A final note
 
 _We salvaged this in the last Game Jam day from an unplayable mess. It's an awful disaster of code, sprites, and even some audio?_
+
+## Thanks to
+
+[Steffo99](https://github.com/Steffo99/), [MaxSensei666](https://github.com/MaxSensei666/), [LBindustries](https://github.com/LBindustries/) and [Viktya](https://github.com/Viktya/)!
+
