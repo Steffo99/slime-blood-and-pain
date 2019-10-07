@@ -1,5 +1,16 @@
 # Slime, Blood and Pain
 
+## Ludum Dare 44: Jam Entry
+
+[![](https://img.shields.io/badge/overall-3.2-yellowgreen) 
+![](https://img.shields.io/badge/fun-3.0-yellowgreen) 
+![](https://img.shields.io/badge/innovation-2.5-yellow) 
+![](https://img.shields.io/badge/theme-3.2-yellowgreen) 
+![](https://img.shields.io/badge/graphics-3.1-yellowgreen) 
+![](https://img.shields.io/badge/audio-3.1-yellowgreen) 
+![](https://img.shields.io/badge/humor-3.0-yellowgreen)
+![](https://img.shields.io/badge/mood-2.9-yellow)](https://ldjam.com/events/ludum-dare/45/gravity-fusion)
+
 Welcome to the Dungeon!
 
 You are doomed to die in a randomly-generated dungeon, inhabitated by not really friendly creatures: cute slimes, some skeletons, creepy multi-eye monsters...
@@ -57,23 +68,6 @@ Arcane candles. A spell protects them from destruction.
 
 ![Demon](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Demon.png)
 A demon you aren't ever going to see. Our artist thought it looked cool, though.
-
-## Results
-
-|Checklist|Status|
-|-|-|
-|Game|✅ Completed in time!|
-
-|Category|Place|Rating|Votes|
-|--------|-----|------|-----|
-|Overall|773rd|3.207|48|
-|Fun|790th|3.011|49|
-|Innovation|984th|2.573|50|
-|Theme|666th|3.213|49|
-|Graphics|771st|3.160|49|
-|Audio|491st|3.117|49|
-|Humor|423rd|3.021|49|
-|Mood|862nd|2.904|49|
 
 ## A final note
 
