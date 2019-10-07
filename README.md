@@ -9,7 +9,9 @@
 ![](https://img.shields.io/badge/graphics-3.1-yellowgreen) 
 ![](https://img.shields.io/badge/audio-3.1-yellowgreen) 
 ![](https://img.shields.io/badge/humor-3.0-yellowgreen)
-![](https://img.shields.io/badge/mood-2.9-yellow)](https://ldjam.com/events/ludum-dare/45/gravity-fusion)
+![](https://img.shields.io/badge/mood-2.9-yellow)](https://ldjam.com/events/ludum-dare/44/slime-blood-and-pain)
+
+## About
 
 Welcome to the Dungeon!
 
