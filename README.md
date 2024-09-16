@@ -1,5 +1,7 @@
 <div align="center">
 
+![](.media/icon-128x128_round.png)
+
 # Slime, Blood and Pain
 
 Welcome to the Dungeon
