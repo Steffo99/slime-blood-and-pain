@@ -1,19 +1,22 @@
+<div align="center">
+
 # Slime, Blood and Pain
 
-## Ludum Dare 44: Jam Entry
+Welcome to the Dungeon
 
-[![](https://img.shields.io/badge/overall-3.2-yellowgreen) 
-![](https://img.shields.io/badge/fun-3.0-yellowgreen) 
-![](https://img.shields.io/badge/innovation-2.5-yellow) 
-![](https://img.shields.io/badge/theme-3.2-yellowgreen) 
-![](https://img.shields.io/badge/graphics-3.1-yellowgreen) 
-![](https://img.shields.io/badge/audio-3.1-yellowgreen) 
-![](https://img.shields.io/badge/humor-3.0-yellowgreen)
-![](https://img.shields.io/badge/mood-2.9-yellow)](https://ldjam.com/events/ludum-dare/44/slime-blood-and-pain)
+</div>
+
+> [!Note]
+>
+> We salvaged this in the last Game Jam day from an unplayable mess. It's an awful disaster of code, sprites, and even some audio...
+
+## Links
+
+[![Ludum Dare 44 Jam](https://img.shields.io/badge/ludum_dare_44-jam-%23ee5533)](https://ldjam.com/events/ludum-dare/44/slime-blood-and-pain)
+ 
+[![Published on Itch.io](https://img.shields.io/badge/itch.io-published-%2390ce59)](https://steffo.itch.io/slime-blood-and-pain)
 
 ## About
-
-Welcome to the Dungeon!
 
 You are doomed to die in a randomly-generated dungeon, inhabitated by not really friendly creatures: cute slimes, some skeletons, creepy multi-eye monsters...
 
@@ -28,52 +31,48 @@ Luckily, you won't need to rely only on your fists: inside the dungeon you'll be
 
 ## Meet the cast
 
-![You](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/ChMov1.png)  
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/ChMov1.png "You")
 You! An adventurer stuck in the Dungeon, willing to sacrifice part of his life to slay more monsters.
 
-![Bart](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/ShopKeepah.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/ShopKeepah.png "Bart")
 Bart, the Shopkeeper. He sells two swords... for your blood!
 
-![Slime](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Slime.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Slime.png "Slime")
 A slime. Be careful! It can bite with its sharp teeth.
 
-![Skeleton](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/SkeletonWithArmorandSword.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/SkeletonWithArmorandSword.png "Skeleton")
 Spooky scary skeletons roam the Dungeon. They wield iron swords: don't get sliced! They can also jump back a square after attacking.
 
-![Ranger](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/SkeletonArcher.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/SkeletonArcher.png "Ranger")
 Some skeletons decided to wield a bow instead of a sword, and will shoot you from far away.
 
-![Watcher](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/WatcherFront.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/WatcherFront.png "Watcher")
 The terrifying Watcher. He's a mighty foe. He can dash after attacking.
 
 ## Items
 
-![Heart](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Heart.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Heart.png "Heart")
 An heart. Heals 1 HP.
 
-![HeartPoisoned](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/HeartPoisoned.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/HeartPoisoned.png "HeartPoisoned")
 A poisoned heart! Damages for 1 HP.
 
-![Sword](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/WeaponSpadina.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/WeaponSpadina.png "Sword")
 This sword deals 3 damage, and can be bought... For **4** of your **Max HP**!
 
-![Sword](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/WeaponSpadone.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/WeaponSpadone.png "Sword")
 This sword deals 5 damage, but if you buy it... You will lose **10 Max HP**!
 
 ## Misc
 
-![Vase](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/VaseRandom.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/VaseRandom.png "Vase")
 A vase. You can break it, I guess?
 
-![Candles](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Candle1.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Candle1.png "Candles")
 Arcane candles. A spell protects them from destruction.
 
-![Demon](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Demon.png)
+![](https://media.githubusercontent.com/media/Steffo99/slime-blood-and-pain/master/Assets/Sprites/Demon.png "Demon")
 A demon you aren't ever going to see. Our artist thought it looked cool, though.
-
-## A final note
-
-_We salvaged this in the last Game Jam day from an unplayable mess. It's an awful disaster of code, sprites, and even some audio?_
 
 ## Thanks to
 
